@@ -4,5 +4,5 @@
       "mode": "auto"
     }
   ],
-  "conventionalCommits.scopes": ["root", "web", "server", "docs"]
+  "conventionalCommits.scopes": ["root", "web", "server", "docs", "packages"]
 }
