@@ -19,6 +19,10 @@ module.exports = {
       ],
     ],
     "subject-case": [2, "always", "sentence-case"],
-    "scope-enum": [2, "always", ["server", "web", "root", "client"]],
+    "scope-enum": [
+      2,
+      "always",
+      ["server", "web", "root", "client", "docs", "packages"],
+    ],
   },
 };
