@@ -3,5 +3,6 @@
     {
       "mode": "auto"
     }
-  ]
+  ],
+  "conventionalCommits.scopes": ["root", "web", "server", "docs"]
 }
