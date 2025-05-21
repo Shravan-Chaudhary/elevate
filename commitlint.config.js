@@ -22,7 +22,7 @@ module.exports = {
     "scope-enum": [
       2,
       "always",
-      ["server", "web", "root", "client", "docs", "packages"],
+      ["server", "web", "root", "client", "docs", "packages", "ci"],
     ],
   },
 };
