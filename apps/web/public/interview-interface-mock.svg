@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definitions for animations -->
+  <defs>
+    <style>
+      @keyframes pulse {
+        0% { opacity: 0.6; }
+        50% { opacity: 1; }
+        100% { opacity: 0.6; }
+      }
+      @keyframes wave {
+        0% { transform: translateY(0); }
+        25% { transform: translateY(-2px); }
+        50% { transform: translateY(0); }
+        75% { transform: translateY(2px); }
+        100% { transform: translateY(0); }
+      }
+      @keyframes blink {
+        0% { opacity: 0.4; }
+        50% { opacity: 1; }
+        100% { opacity: 0.4; }
+      }
+      .audio-wave rect {
+        animation: wave 1.5s infinite;
+      }
+      .audio-wave rect:nth-child(1) { animation-delay: 0s; }
+      .audio-wave rect:nth-child(2) { animation-delay: 0.2s; }
+      .audio-wave rect:nth-child(3) { animation-delay: 0.4s; }
+      .audio-wave rect:nth-child(4) { animation-delay: 0.6s; }
+      .audio-wave rect:nth-child(5) { animation-delay: 0.8s; }
+      .audio-wave rect:nth-child(6) { animation-delay: 1s; }
+      .audio-wave rect:nth-child(7) { animation-delay: 1.2s; }
+      .recording-indicator {
+        animation: pulse 2s infinite;
+      }
+      .cursor {
+        animation: blink 1s infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+
+  <!-- Header -->
+  <rect width="800" height="48" rx="12 12 0 0" fill="#F9FAFB"/>
+  <rect x="0" y="47" width="800" height="1" fill="#E5E7EB"/>
+
+  <!-- Window Controls -->
+  <circle cx="24" cy="24" r="6" fill="#F87171"/>
+  <circle cx="48" cy="24" r="6" fill="#FBBF24"/>
+  <circle cx="72" cy="24" r="6" fill="#34D399"/>
+
+  <!-- Title -->
+  <text x="400" y="30" font-family="Inter, sans-serif" font-size="14" font-weight="500" text-anchor="middle" fill="#6B7280">Interview in Progress - Senior Software Engineer</text>
+
+  <!-- Left Panel - AI Interviewer -->
+  <rect x="24" y="72" width="360" height="404" rx="8" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="48" y="100" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#111827">AI Interviewer</text>
+
+  <!-- Avatar and Speaking Indicator -->
+  <circle cx="48" cy="136" r="24" fill="#E9F5E9"/>
+  <text x="48" y="142" font-family="Inter, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#059669">AI</text>
+
+  <rect x="84" y="120" width="276" height="80" rx="8" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="100" y="138" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#111827">
+    <tspan x="100" dy="0">Can you tell me about a challenging project</tspan>
+    <tspan x="100" dy="20">you worked on and how you overcame the</tspan>
+    <tspan x="100" dy="20">obstacles?</tspan>
+  </text>
+
+  <!-- Audio Wave Visualization -->
+  <rect x="84" y="220" width="276" height="48" rx="8" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="100" y="242" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#4B5563">Current question playing...</text>
+  <g class="audio-wave">
+    <rect x="100" y="250" width="30" height="4" rx="2" fill="#059669"/>
+    <rect x="136" y="250" width="20" height="4" rx="2" fill="#059669"/>
+    <rect x="162" y="250" width="40" height="4" rx="2" fill="#059669"/>
+    <rect x="208" y="250" width="15" height="4" rx="2" fill="#059669"/>
+    <rect x="229" y="250" width="25" height="4" rx="2" fill="#059669"/>
+    <rect x="260" y="250" width="35" height="4" rx="2" fill="#059669"/>
+    <rect x="301" y="250" width="30" height="4" rx="2" fill="#059669"/>
+  </g>
+
+  <!-- Interview Progress -->
+  <text x="48" y="300" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#111827">Interview Progress</text>
+  <rect x="48" y="316" width="312" height="8" rx="4" fill="#E5E7EB"/>
+  <rect x="48" y="316" width="120" height="8" rx="4" fill="#059669"/>
+  <text x="48" y="340" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">10:24 elapsed • Question 5 of 12</text>
+
+  <!-- Questions List -->
+  <text x="48" y="380" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#111827">Previous Questions</text>
+  <rect x="48" y="396" width="12" height="12" rx="6" fill="#059669"/>
+  <text x="72" y="406" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">Tell me about yourself</text>
+  <rect x="48" y="420" width="12" height="12" rx="6" fill="#059669"/>
+  <text x="72" y="430" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">What are your strengths and weaknesses?</text>
+  <rect x="48" y="444" width="12" height="12" rx="6" fill="#059669"/>
+  <text x="72" y="454" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">Why do you want to work at our company?</text>
+
+  <!-- Right Panel - Candidate View -->
+  <rect x="408" y="72" width="368" height="404" rx="8" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="432" y="100" font-family="Inter, sans-serif" font-size="16" font-weight="600" fill="#111827">Your Response</text>
+
+  <!-- Microphone and Status -->
+  <circle cx="432" cy="136" r="24" fill="#FEF2F2"/>
+  <text x="432" y="142" font-family="Inter, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#DC2626">REC</text>
+  <text x="468" y="136" font-family="Inter, sans-serif" font-size="14" font-weight="500" fill="#111827">Now Speaking...</text>
+  <rect x="468" y="144" width="60" height="6" rx="3" fill="#DC2626" class="recording-indicator"/>
+
+  <!-- Live Transcript -->
+  <rect x="432" y="180" width="320" height="140" rx="8" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="448" y="204" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#111827">Live transcript:</text>
+  <text x="448" y="228" font-family="Inter, sans-serif" font-size="13" fill="#4B5563">
+    <tspan x="448" dy="0">In my previous role at Acme Tech, I led a team</tspan>
+    <tspan x="448" dy="20">that was responsible for redesigning our payment</tspan>
+    <tspan x="448" dy="20">processing system. The biggest challenge was</tspan>
+    <tspan x="448" dy="20">maintaining 24/7 availability while migrating...</tspan>
+  </text>
+  <rect x="740" y="310" width="6" height="14" fill="#111827" class="cursor"/>
+
+  <!-- Real-time Feedback -->
+  <rect x="432" y="340" width="320" height="112" rx="8" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="448" y="364" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#111827">Real-time analysis:</text>
+
+  <text x="448" y="388" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#059669">Speaking pace:</text>
+  <rect x="548" y="380" width="100" height="6" rx="3" fill="#E5E7EB"/>
+  <rect x="548" y="380" width="65" height="6" rx="3" fill="#059669"/>
+  <text x="656" y="388" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">Good</text>
+
+  <text x="448" y="416" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#DC2626">Filler words:</text>
+  <rect x="548" y="408" width="100" height="6" rx="3" fill="#E5E7EB"/>
+  <rect x="548" y="408" width="80" height="6" rx="3" fill="#DC2626"/>
+  <text x="656" y="416" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">Too many</text>
+
+  <text x="448" y="444" font-family="Inter, sans-serif" font-size="13" font-weight="500" fill="#FBBF24">Structure:</text>
+  <rect x="548" y="436" width="100" height="6" rx="3" fill="#E5E7EB"/>
+  <rect x="548" y="436" width="40" height="6" rx="3" fill="#FBBF24"/>
+  <text x="656" y="444" font-family="Inter, sans-serif" font-size="12" fill="#6B7280">Add details</text>
+</svg>
