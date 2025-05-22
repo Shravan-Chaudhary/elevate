@@ -1,0 +1,54 @@
+.bar-fill-85 {
+  animation: bar-fill-85 1.7s ease-in-out forwards;
+}
+
+.bar-fill-92 {
+  animation: bar-fill-92 1.7s ease-in-out forwards 0.1s;
+}
+
+.bar-fill-68 {
+  animation: bar-fill-68 1.7s ease-in-out forwards 0.2s;
+}
+
+@keyframes bar-fill-85 {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 85%;
+  }
+}
+
+@keyframes bar-fill-92 {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 92%;
+  }
+}
+
+@keyframes bar-fill-68 {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 68%;
+  }
+}
+
+.bar-initial {
+  width: 0%;
+}
+
+.animate-bar-fill-85 {
+  animation: bar-fill-85 1.7s ease-in-out forwards;
+}
+
+.animate-bar-fill-92 {
+  animation: bar-fill-92 1.7s ease-in-out forwards 0.1s;
+}
+
+.animate-bar-fill-68 {
+  animation: bar-fill-68 1.7s ease-in-out forwards 0.2s;
+}
