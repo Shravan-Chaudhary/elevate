@@ -151,6 +151,15 @@ export function InteractiveDemo() {
 
     const simulateDialogue = () => {
       const currentLine = INTERVIEW_DIALOG[dialogIndex];
+      if (!currentLine) {
+        if (intervalRef.current) {
+          clearTimeout(intervalRef.current);
+        }
+        setSpeaking(null);
+        setActiveSubtitle("");
+        setIsTyping(false);
+        return;
+      }
       setSpeaking(currentLine.speaker as "user" | "ai");
       setIsTyping(true);
 

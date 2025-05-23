@@ -12,7 +12,7 @@ const InterviewAnalysisCard: FC = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         // If the card is in view and bars haven't been made visible yet
-        if (entry.isIntersecting && !barsVisible) {
+        if (entry && entry.isIntersecting && !barsVisible) {
           setBarsVisible(true);
         }
       },
