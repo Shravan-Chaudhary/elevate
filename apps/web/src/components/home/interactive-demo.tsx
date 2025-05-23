@@ -268,7 +268,7 @@ export function InteractiveDemo() {
           <div className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center justify-center w-auto">
             <div className="px-4 py-1 bg-gray-100 rounded-full text-xs text-gray-600 max-w-[220px] mx-auto overflow-hidden">
               <div className="animate-loop-x whitespace-nowrap">
-                interwiz.ai/interview-session
+                elevate.ai/interview-session
               </div>
             </div>
           </div>

@@ -49,7 +49,7 @@ export function Features() {
     {
       title: "Voice-Based AI Interviews",
       description:
-        "Talk to our AI interviewer naturally, as you would in a real interview. InterWiz listens to your responses and provides personalized feedback to help you improve with each practice session.",
+        "Talk to our AI interviewer naturally, as you would in a real interview. Elevate listens to your responses and provides personalized feedback to help you improve with each practice session.",
       icon: <Mic className="h-8 w-8 text-white" />,
     },
     {
@@ -128,7 +128,7 @@ export function Features() {
               Our platform offers unique advantages for interview preparation.
               Leverage AI-powered analysis, flexible practice schedules, and
               actionable feedback to boost your confidence and performance.
-              Prepare smarter, not just harder, with InterWiz.
+              Prepare smarter, not just harder, with Elevate.
             </p>
           </div>
 

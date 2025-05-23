@@ -122,7 +122,7 @@ export function Header() {
 
           <div className="flex items-center gap-3">
             {/* Get Started Button */}
-            <Link href="/waitlist">
+            <Link href="/sign-in">
               <Button size="sm" className={getStartedButtonClasses}>
                 {/* Microphone SVG */}
                 <MicrophoneIcon className="w-4 h-4" />

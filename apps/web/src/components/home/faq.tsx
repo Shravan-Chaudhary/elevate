@@ -14,19 +14,19 @@ export function FAQ() {
 
   const faqs: FAQItem[] = [
     {
-      question: "How does InterWiz's AI interviewing work?",
+      question: "How does Elevate's AI interviewing work?",
       answer:
-        "InterWiz uses advanced AI to simulate realistic interview experiences. Our system adapts questions based on your responses, provides real-time feedback, and generates comprehensive performance reports that highlight your strengths and areas for improvement. The AI interviewer is trained on thousands of real interview scenarios to ensure a realistic experience.",
+        "Elevate uses advanced AI to simulate realistic interview experiences. Our system adapts questions based on your responses, provides real-time feedback, and generates comprehensive performance reports that highlight your strengths and areas for improvement. The AI interviewer is trained on thousands of real interview scenarios to ensure a realistic experience.",
     },
     {
-      question: "Do I need special equipment to use InterWiz?",
+      question: "Do I need special equipment to use Elevate?",
       answer:
-        "No special equipment is needed! InterWiz works on any modern browser on your computer, tablet, or smartphone. For the best experience, we recommend using a device with a working microphone and camera, but our text-based interview mode is also available if you prefer typing responses.",
+        "No special equipment is needed! Elevate works on any modern browser on your computer, tablet, or smartphone. For the best experience, we recommend using a device with a working microphone and camera, but our text-based interview mode is also available if you prefer typing responses.",
     },
     {
       question: "Are the interview questions specific to my industry?",
       answer:
-        "Yes! InterWiz offers industry-specific interview templates for over 20 different fields, including technology, finance, healthcare, marketing, and more. Each template contains questions tailored to different experience levels and job roles within that industry.",
+        "Yes! Elevate offers industry-specific interview templates for over 20 different fields, including technology, finance, healthcare, marketing, and more. Each template contains questions tailored to different experience levels and job roles within that industry.",
     },
     {
       question: "How accurate is the AI feedback?",
@@ -36,7 +36,7 @@ export function FAQ() {
     {
       question: "Can I practice for different types of interviews?",
       answer:
-        "Absolutely! InterWiz supports various interview formats, including behavioral, technical, case study, and situational interviews. You can also practice specific interview stages, such as initial screenings, technical assessments, or final rounds.",
+        "Absolutely! Elevate supports various interview formats, including behavioral, technical, case study, and situational interviews. You can also practice specific interview stages, such as initial screenings, technical assessments, or final rounds.",
     },
     {
       question: "Is my interview data private and secure?",
@@ -44,7 +44,7 @@ export function FAQ() {
         "Yes, your privacy is extremely important to us. All interview data is encrypted, and we never share your personal information or interview recordings with third parties. You can delete your interview data at any time from your account settings.",
     },
     {
-      question: "Can I use InterWiz for team training?",
+      question: "Can I use Elevate for team training?",
       answer:
         "Yes! Our Team plan is perfect for career coaches, HR departments, and educational institutions. You can manage multiple user accounts, track progress, and share interview insights to improve your team's interviewing skills collectively.",
     },
@@ -67,7 +67,7 @@ export function FAQ() {
             Frequently Asked Questions
           </h2>
           <p className="mt-4 max-w-[700px] text-muted-foreground text-lg">
-            Everything you need to know about InterWiz and how it can help you
+            Everything you need to know about Elevate and how it can help you
             ace your next interview.
           </p>
         </div>

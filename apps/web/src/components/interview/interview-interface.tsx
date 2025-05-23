@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { Phone, Mic, MicOff } from "lucide-react";
 import AIAvatar from "@/components/interview/ai-avatar";
-import UserAvatar from "@/components/interview/user-avatar";
 import SoundWave from "@/components/interview/sound-wave";
+import UserAvatar from "@/components/interview/user-avatar";
+import { Mic, MicOff, Phone } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 export function InterviewInterface() {
   const [callActive, setCallActive] = useState(false);
@@ -172,7 +172,7 @@ export function InterviewInterface() {
       setActiveSubtitle(''); // Clear active subtitle once typing/speaking finishes
       setSubtitleHistory(prev => [
         ...prev,
-        `${response.speaker === 'ai' ? 'InterWiz: ' : 'You: '}${response.text}`
+        `${response.speaker === 'ai' ? 'Elevate: ' : 'You: '}${response.text}`
       ]);
     }
     // Ensure scroll to bottom after processing
@@ -215,7 +215,7 @@ export function InterviewInterface() {
        const typeWord = () => {
            if (wordIndex < words.length) {
                displayText += (wordIndex > 0 ? ' ' : '') + words[wordIndex];
-               setActiveSubtitle(`${speaker === 'ai' ? 'InterWiz: ' : 'You: '}${displayText}`);
+               setActiveSubtitle(`${speaker === 'ai' ? 'Elevate: ' : 'You: '}${displayText}`);
                wordIndex++;
                setTimeout(typeWord, 70 + Math.random() * 50);
            } else {
@@ -253,7 +253,7 @@ export function InterviewInterface() {
                 <Mic className="h-4 w-4 text-green-700" />
               </div>
               <span className="ml-2 font-medium text-gray-900">
-                InterWiz Interview Session
+                Elevate Interview Session
               </span>
             </div>
             <div className="flex items-center space-x-2">
@@ -318,7 +318,7 @@ export function InterviewInterface() {
                       speaking === "ai" ? "bg-green-500" : "bg-gray-400"
                     } mr-1.5`}
                   ></div>
-                  InterWiz AI
+                  Elevate AI
                 </div>
 
                 <div className="absolute top-3 right-3 bg-black/5 backdrop-blur-sm rounded-md px-2 py-0.5 text-[10px] text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -394,7 +394,7 @@ export function InterviewInterface() {
                       <div key={i} className="flex items-start">
                         <div
                           className={`max-w-[80%] rounded-lg px-3 py-2 text-sm ${
-                            text.startsWith("InterWiz:")
+                            text.startsWith("Elevate:")
                               ? "bg-green-50 text-green-800 self-start"
                               : "bg-blue-50 text-blue-800 self-end ml-auto"
                           }`}
