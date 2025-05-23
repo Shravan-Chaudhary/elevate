@@ -229,6 +229,12 @@ importers:
       '@fontsource-variable/inter':
         specifier: ^5.2.5
         version: 5.2.5
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       '@shadcn/ui':
         specifier: ^0.0.4
         version: 0.0.4

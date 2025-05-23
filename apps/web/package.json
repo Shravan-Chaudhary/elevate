@@ -41,6 +41,8 @@
     "zustand": "^5.0.4"
   },
   "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
     "@eslint/eslintrc": "^3",
     "@fontsource-variable/inter": "^5.2.5",
     "@shadcn/ui": "^0.0.4",
