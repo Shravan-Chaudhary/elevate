@@ -26,7 +26,7 @@ function HeroHeadline() {
         <span className="block text-green-900 mt-2">AI voice coaching</span>
       </h1>
       <p className="mx-auto max-w-[600px] text-xl text-gray-500 leading-relaxed font-normal">
-        Talk to InterWiz like a real interviewer. Get instant feedback on your
+        Talk to Elevate like a real interviewer. Get instant feedback on your
         responses and learn how to improve your interview skills.
       </p>
     </div>
