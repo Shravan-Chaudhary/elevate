@@ -2,25 +2,71 @@
 
 import { FC, useState, useEffect, useRef } from "react";
 import { BarChart, CheckCircle } from "lucide-react";
-import styles from "./interview-analysis-card.module.css";
+import { MetricBar } from "@/components/shared/metric-bar";
+import { IconContainer } from "@/components/shared/icon-container";
+import { GradientBackground } from "@/components/shared/gradient-background";
+import { MetricData } from "@/types/components";
+
+interface ImprovementItemProps {
+  text: string;
+}
+
+const ImprovementItem: FC<ImprovementItemProps> = ({ text }) => (
+  <li className="flex items-start text-sm">
+    <IconContainer
+      size="sm"
+      variant="solid"
+      color="success"
+      className="flex-shrink-0 mr-2 mt-0.5"
+    >
+      <CheckCircle className="h-3 w-3" />
+    </IconContainer>
+    <span className="text-gray-700">{text}</span>
+  </li>
+);
 
 const InterviewAnalysisCard: FC = () => {
-  const [barsVisible, setBarsVisible] = useState(false);
+  const [metricsVisible, setMetricsVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+
+  const metrics: MetricData[] = [
+    {
+      label: "Communication clarity",
+      value: "85%",
+      percentage: 85,
+      color: "green",
+    },
+    {
+      label: "Technical accuracy",
+      value: "92%",
+      percentage: 92,
+      color: "green",
+    },
+    {
+      label: "Answer structure",
+      value: "68%",
+      percentage: 68,
+      color: "amber",
+    },
+  ];
+
+  const improvements = [
+    "Use the STAR method for behavioral questions",
+    'Reduce filler words ("um", "like")',
+    "Include more quantifiable achievements",
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // If the card is in view and bars haven't been made visible yet
-        if (entry && entry.isIntersecting && !barsVisible) {
-          setBarsVisible(true);
+        if (entry && entry.isIntersecting && !metricsVisible) {
+          setMetricsVisible(true);
         }
       },
       {
-        // Options for the observer
-        root: null, // observing relative to the viewport
+        root: null,
         rootMargin: "0px",
-        threshold: 0.95, // Trigger when 95% of the card is visible
+        threshold: 0.95,
       },
     );
 
@@ -30,26 +76,34 @@ const InterviewAnalysisCard: FC = () => {
       observer.observe(currentCardRef);
     }
 
-    // Cleanup function to disconnect the observer when the component unmounts
     return () => {
       if (currentCardRef) {
         observer.unobserve(currentCardRef);
       }
     };
-  }, []); // Empty dependency array ensures this runs only once after initial render
+  }, [metricsVisible]);
 
   return (
     <div
-      ref={cardRef} // Attach the ref to the main container
+      ref={cardRef}
       className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 relative"
     >
-      <div className="bg-gradient-to-br from-green-50/30 to-emerald-50/30 absolute inset-0 rounded-xl"></div>
+      <GradientBackground
+        variant="card"
+        className="absolute inset-0 rounded-xl"
+      />
 
       <div className="relative">
+        {/* Header */}
         <div className="flex items-center mb-4">
-          <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
-            <BarChart className="h-5 w-5 text-green-700" />
-          </div>
+          <IconContainer
+            size="md"
+            variant="solid"
+            color="primary"
+            className="mr-3"
+          >
+            <BarChart className="h-5 w-5" />
+          </IconContainer>
           <div>
             <div className="font-semibold text-gray-900">
               Interview Analysis
@@ -60,86 +114,27 @@ const InterviewAnalysisCard: FC = () => {
           </div>
         </div>
 
+        {/* Metrics */}
         <div className="space-y-5">
-          {/* TODO: Replace with reusable metric item component if needed elsewhere */}
-          <div>
-            <div className="flex justify-between items-center mb-2">
-              <div className="text-sm font-medium text-gray-700">
-                Communication clarity
-              </div>
-              <div className="text-sm font-medium text-green-700">85%</div>
-            </div>
-            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div
-                className={`h-full bg-green-500 rounded-full ease-in-out ${
-                  styles["bar-initial"]
-                } ${barsVisible ? styles["bar-fill-85"] : ""}`}
-              ></div>
-            </div>
-          </div>
-
-          <div>
-            <div className="flex justify-between items-center mb-2">
-              <div className="text-sm font-medium text-gray-700">
-                Technical accuracy
-              </div>
-              <div className="text-sm font-medium text-green-700">92%</div>
-            </div>
-            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div
-                className={`h-full bg-green-500 rounded-full ease-in-out ${
-                  styles["bar-initial"]
-                } ${barsVisible ? styles["bar-fill-92"] : ""}`}
-              ></div>
-            </div>
-          </div>
-
-          <div>
-            <div className="flex justify-between items-center mb-2">
-              <div className="text-sm font-medium text-gray-700">
-                Answer structure
-              </div>
-              <div className="text-sm font-medium text-amber-600">68%</div>
-            </div>
-            <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div
-                className={`h-full bg-amber-500 rounded-full ease-in-out ${
-                  styles["bar-initial"]
-                } ${barsVisible ? styles["bar-fill-68"] : ""}`}
-              ></div>
-            </div>
-          </div>
+          {metrics.map((metric, index) => (
+            <MetricBar
+              key={metric.label}
+              metric={metric}
+              isVisible={metricsVisible}
+              delay={index * 200}
+            />
+          ))}
         </div>
 
+        {/* Improvement Suggestions */}
         <div className="mt-6 pt-5 border-t border-gray-100">
           <h5 className="text-sm font-semibold text-gray-900 mb-3">
             Improvement suggestions
           </h5>
           <ul className="space-y-2">
-            <li className="flex items-start text-sm">
-              <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mr-2 mt-0.5">
-                <CheckCircle className="h-3 w-3 text-green-700" />
-              </div>
-              <span className="text-gray-700">
-                Use the STAR method for behavioral questions
-              </span>
-            </li>
-            <li className="flex items-start text-sm">
-              <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mr-2 mt-0.5">
-                <CheckCircle className="h-3 w-3 text-green-700" />
-              </div>
-              <span className="text-gray-700">
-                Reduce filler words (&quot;um&quot;, &quot;like&quot;)
-              </span>
-            </li>
-            <li className="flex items-start text-sm">
-              <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 flex items-center justify-center mr-2 mt-0.5">
-                <CheckCircle className="h-3 w-3 text-green-700" />
-              </div>
-              <span className="text-gray-700">
-                Include more quantifiable achievements
-              </span>
-            </li>
+            {improvements.map((improvement, index) => (
+              <ImprovementItem key={index} text={improvement} />
+            ))}
           </ul>
         </div>
       </div>

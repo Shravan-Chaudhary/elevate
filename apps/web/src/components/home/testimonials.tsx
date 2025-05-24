@@ -1,21 +1,13 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent } from "@/components/ui/card";
-import { QuoteIcon, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { Section } from "@/components/shared/section";
+import { Heading } from "@/components/shared/heading";
+import { GradientBackground } from "@/components/shared/gradient-background";
+import { TestimonialCard } from "@/components/shared/testimonial-card";
+import { TestimonialData } from "@/types/components";
 
-interface Testimonial {
-  quote: string;
-  author: {
-    name: string;
-    role: string;
-    avatar?: string;
-  };
-  rating: number;
-}
-
-const testimonialsData: Testimonial[] = [
+const testimonialsData: TestimonialData[] = [
   {
     quote:
       "Elevate has become indispensable for my interview prep. The AI feedback feels like having a personal coach, and the insights have significantly improved my confidence.",
@@ -78,22 +70,6 @@ const testimonialsData: Testimonial[] = [
   },
 ];
 
-function TestimonialStars({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center text-amber-400 mb-4">
-      {[...Array(5)].map((_, i) => (
-        <Star
-          key={i}
-          className={`h-5 w-5 ${
-            i < rating ? "fill-amber-400" : "fill-gray-300 dark:fill-gray-600"
-          }`}
-          strokeWidth={i < rating ? 0 : 1}
-        />
-      ))}
-    </div>
-  );
-}
-
 export function Testimonials() {
   const sectionVariants = {
     hidden: { opacity: 0 },
@@ -103,25 +79,16 @@ export function Testimonials() {
     },
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
-    },
-  };
-
   return (
-    <motion.section
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      className="relative py-28 overflow-hidden bg-gradient-to-br from-gray-50 to-green-50/70 dark:from-slate-900 dark:to-green-900/30"
+    <Section
+      variant="default"
+      background="subtle"
+      className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-green-50/70 dark:from-slate-900 dark:to-green-900/30"
       id="testimonials"
     >
-      {/* Decorative background from Hero component (adapted) */}
+      <GradientBackground variant="section" className="absolute inset-0" />
+
+      {/* Decorative background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute left-[50%] top-0 h-[1000px] w-[1000px] -translate-x-[50%] -translate-y-[20%] [mask-image:radial-gradient(closest-side,white_50%,transparent_100%)] dark:[mask-image:radial-gradient(closest-side,black_50%,transparent_100%)] pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-r from-green-100/50 to-emerald-100/50 opacity-40 dark:from-green-800/30 dark:to-emerald-800/30 dark:opacity-30" />
@@ -131,7 +98,13 @@ export function Testimonials() {
         <div className='absolute -z-20 inset-0 bg-[url("/grid-pattern.svg")] bg-center opacity-[0.07] dark:opacity-[0.03] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] dark:[mask-image:linear-gradient(180deg,black,rgba(0,0,0,0))] pointer-events-none'></div>
       </div>
 
-      <div className="container max-w-6xl mx-auto px-4 md:px-6">
+      <motion.div
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="relative z-10"
+      >
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -139,9 +112,14 @@ export function Testimonials() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="flex flex-col items-center text-center mb-16 md:mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-green-900 dark:text-green-100 mb-4">
+          <Heading
+            level={2}
+            size="4xl"
+            align="center"
+            className="text-green-900 dark:text-green-100 mb-4"
+          >
             Loved by Job Seekers Everywhere
-          </h2>
+          </Heading>
           <p className="mt-2 max-w-2xl text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
             Hear directly from individuals who have transformed their interview
             skills and confidence with Elevate.
@@ -150,47 +128,14 @@ export function Testimonials() {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {testimonialsData.map((testimonial, index) => (
-            <motion.div key={index} variants={cardVariants}>
-              <Card className="h-full flex flex-col bg-white/80 dark:bg-slate-800/60 backdrop-blur-md border-gray-200/70 dark:border-slate-700/50 shadow-xl shadow-green-900/5 dark:shadow-black/20 hover:shadow-green-900/10 dark:hover:shadow-black/30 rounded-2xl hover:scale-[1.03] transition-all duration-300 ease-in-out overflow-hidden">
-                <CardContent className="p-6 md:p-8 flex flex-col flex-grow">
-                  <TestimonialStars rating={testimonial.rating} />
-                  <div className="relative mb-6 flex-grow">
-                    <QuoteIcon className="h-10 w-10 text-green-200/80 dark:text-green-700/50 absolute -top-2 -left-3 transform -translate-x-1/2 opacity-70" />
-                    <p className="text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed font-medium relative z-10 italic">
-                      &ldquo;{testimonial.quote}&rdquo;
-                    </p>
-                  </div>
-                  <div className="flex items-center mt-auto pt-4 border-t border-gray-200/70 dark:border-slate-700/50">
-                    <Avatar className="h-11 w-11 mr-4 shadow-sm border border-gray-200 dark:border-slate-700">
-                      {testimonial.author.avatar ? (
-                        <AvatarImage
-                          src={testimonial.author.avatar}
-                          alt={testimonial.author.name}
-                          className="object-cover"
-                        />
-                      ) : null}
-                      <AvatarFallback className="bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100 font-semibold">
-                        {testimonial.author.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-semibold text-green-800 dark:text-green-200">
-                        {testimonial.author.name}
-                      </p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {testimonial.author.role}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <TestimonialCard
+              key={index}
+              testimonial={testimonial}
+              index={index}
+            />
           ))}
         </div>
-      </div>
-    </motion.section>
+      </motion.div>
+    </Section>
   );
 }

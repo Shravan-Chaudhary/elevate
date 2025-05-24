@@ -1,30 +1,16 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Check } from "lucide-react";
-import Link from "next/link";
+"use client";
 
-interface PricingTier {
-  name: string;
-  description: string;
-  price: string;
-  priceDetail: string;
-  features: string[];
-  buttonText: string;
-  buttonVariant?: "default" | "outline";
-  highlighted?: boolean;
-  badge?: string;
-}
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Section } from "@/components/shared/section";
+import { Heading } from "@/components/shared/heading";
+import { GradientBackground } from "@/components/shared/gradient-background";
+import { PricingCard } from "@/components/shared/pricing-card";
+import { PricingTierData } from "@/types/components";
 
 export function Pricing() {
-  const tiers: PricingTier[] = [
+  const tiers: PricingTierData[] = [
     {
       name: "Free",
       description: "Perfect for beginners to practice interviewing.",
@@ -78,87 +64,103 @@ export function Pricing() {
     },
   ];
 
+  const sectionVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: "easeOut" },
+    },
+  };
+
   return (
-    <section className="py-20" id="pricing">
-      <div className="container max-w-6xl mx-auto px-2 md:px-6">
-        <div className="flex flex-col items-center text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+    <Section
+      variant="default"
+      background="subtle"
+      className="relative overflow-hidden bg-gradient-to-br from-gray-50/30 to-green-50/20 dark:from-slate-900 dark:to-green-900/10"
+      id="pricing"
+    >
+      <GradientBackground variant="section" className="absolute inset-0" />
+
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute w-[40rem] h-[40rem] rounded-full bg-green-800/5 dark:bg-green-400/5 -top-[10rem] -right-[10rem] blur-3xl"></div>
+        <div className="absolute w-[30rem] h-[30rem] rounded-full bg-emerald-800/5 dark:bg-emerald-400/5 top-[30rem] -left-[10rem] blur-3xl"></div>
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.02] dark:opacity-[0.01] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] dark:[mask-image:linear-gradient(180deg,black,rgba(0,0,0,0))]"></div>
+      </div>
+
+      <motion.div
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="relative z-10"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="flex flex-col items-center text-center mb-16 md:mb-20"
+        >
+          <Heading
+            level={2}
+            size="4xl"
+            align="center"
+            className="text-gray-900 dark:text-gray-50 mb-4"
+          >
             Simple, Transparent Pricing
-          </h2>
-          <p className="mt-4 max-w-[700px] text-muted-foreground text-lg">
+          </Heading>
+          <p className="mt-2 max-w-2xl text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
             Choose the plan that&apos;s right for you. All plans include a 7-day
             free trial.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {tiers.map((tier) => (
-            <Card
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
+          {tiers.map((tier, index) => (
+            <motion.div
               key={tier.name}
-              className={`flex flex-col border ${
-                tier.highlighted
-                  ? "border-green-200 shadow-lg shadow-green-100/40"
-                  : "border-border"
-              }`}
+              variants={cardVariants}
+              className="animate-fade-in"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              <CardHeader className="pb-6">
-                {tier.badge && (
-                  <Badge className="w-fit mb-2 bg-green-100 text-green-800 hover:bg-green-100">
-                    {tier.badge}
-                  </Badge>
-                )}
-                <CardTitle className="text-2xl">{tier.name}</CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  {tier.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="pb-6">
-                <div className="mb-6">
-                  <span className="text-4xl font-bold">{tier.price}</span>
-                  <span className="text-muted-foreground ml-2">
-                    {tier.priceDetail}
-                  </span>
-                </div>
-
-                <ul className="space-y-3">
-                  {tier.features.map((feature) => (
-                    <li key={feature} className="flex items-start">
-                      <Check className="h-5 w-5 text-green-500 mr-2 shrink-0 mt-0.5" />
-                      <span className="text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-              <CardFooter className="pt-4 mt-auto">
-                <Button
-                  asChild
-                  variant={tier.buttonVariant || "default"}
-                  className={`w-full ${
-                    tier.highlighted ? "bg-green-600 hover:bg-green-700" : ""
-                  }`}
-                >
-                  <Link href={tier.name === "Team" ? "/contact" : "/signup"}>
-                    {tier.buttonText}
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
+              <PricingCard tier={tier} index={index} />
+            </motion.div>
           ))}
         </div>
 
-        <div className="mt-16 text-center">
-          <h3 className="text-xl font-semibold mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+          className="text-center"
+        >
+          <Heading level={3} size="xl" align="center" className="mb-4">
             Need something different?
-          </h3>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          </Heading>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed mb-6">
             We offer custom plans for larger teams and organizations. Contact
             our sales team to create a plan tailored to your specific needs.
           </p>
-          <Button variant="outline" className="mt-4">
+          <Button
+            variant="outline"
+            className="hover:bg-green-50 dark:hover:bg-green-950/30 border-green-200 dark:border-green-700/50 hover:border-green-300 dark:hover:border-green-600"
+            asChild
+          >
             <Link href="/contact">Contact Sales</Link>
           </Button>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </Section>
   );
 }
