@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Section } from "@/components/shared/section";
 import { Heading } from "@/components/shared/heading";
+import { Description } from "@/components/shared/description";
 import { GradientBackground } from "@/components/shared/gradient-background";
 import { PricingCard } from "@/components/shared/pricing-card";
 import { PricingTierData } from "@/types/components";
@@ -113,16 +114,26 @@ export function Pricing() {
         >
           <Heading
             level={2}
-            size="4xl"
+            size="3xl"
             align="center"
-            className="text-gray-900 dark:text-gray-50 mb-4"
+            variant="section"
+            className="mb-6"
           >
-            Simple, Transparent Pricing
+            Simple,{" "}
+            <span className="text-green-700 dark:text-green-400">
+              Transparent
+            </span>{" "}
+            Pricing
           </Heading>
-          <p className="mt-2 max-w-2xl text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+          <Description
+            variant="section"
+            align="center"
+            size="xl"
+            maxWidth="2xl"
+          >
             Choose the plan that&apos;s right for you. All plans include a 7-day
             free trial.
-          </p>
+          </Description>
         </motion.div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">

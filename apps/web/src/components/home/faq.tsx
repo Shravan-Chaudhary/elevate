@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { HelpCircle } from "lucide-react";
 import { Section } from "@/components/shared/section";
 import { Heading } from "@/components/shared/heading";
+import { Description } from "@/components/shared/description";
 import { IconContainer } from "@/components/shared/icon-container";
 import { GradientBackground } from "@/components/shared/gradient-background";
 import { FAQItem } from "@/components/shared/faq-item";
@@ -90,24 +91,33 @@ export function Faq() {
             size="xl"
             variant="solid"
             color="primary"
-            className="mb-4"
+            className="mb-6"
           >
             <HelpCircle className="h-6 w-6" />
           </IconContainer>
 
           <Heading
             level={2}
-            size="4xl"
+            size="3xl"
             align="center"
-            className="text-gray-900 dark:text-gray-50 mb-4"
+            variant="section"
+            className="mb-6"
           >
-            Frequently Asked Questions
+            Frequently Asked{" "}
+            <span className="text-green-700 dark:text-green-400">
+              Questions
+            </span>
           </Heading>
 
-          <p className="mt-2 max-w-2xl text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+          <Description
+            variant="section"
+            align="center"
+            size="xl"
+            maxWidth="2xl"
+          >
             Find answers to common questions about Elevate, its features, and
             how it can help you succeed.
-          </p>
+          </Description>
         </motion.div>
 
         <motion.div

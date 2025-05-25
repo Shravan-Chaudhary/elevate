@@ -4,6 +4,7 @@ import { Section } from "@/components/shared/section";
 import { GradientBackground } from "@/components/shared/gradient-background";
 import { PromoBadge } from "@/components/shared/promo-badge";
 import { Heading } from "@/components/shared/heading";
+import { Description } from "@/components/shared/description";
 import { CTAButtons } from "@/components/shared/cta-buttons";
 import { CompanyLogos } from "@/components/shared/company-logos";
 import { InteractiveDemo } from "./interactive-demo";
@@ -11,14 +12,20 @@ import { InteractiveDemo } from "./interactive-demo";
 function HeroHeadline() {
   return (
     <div className="space-y-5 max-w-[800px]">
-      <Heading level={1} size="4xl" align="center" className="leading-[1.1]">
+      <Heading
+        level={1}
+        size="4xl"
+        variant="hero"
+        align="center"
+        className="leading-[1.1]"
+      >
         Practice interviews with
         <span className="block text-green-900 mt-2">AI voice coaching</span>
       </Heading>
-      <p className="mx-auto max-w-[600px] text-xl text-gray-500 leading-relaxed font-normal">
+      <Description variant="hero" size="lg" align="center" maxWidth="xl">
         Talk to Elevate like a real interviewer. Get instant feedback on your
         responses and learn how to improve your interview skills.
-      </p>
+      </Description>
     </div>
   );
 }

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Heading } from "./heading";
+import { Description } from "./description";
 
 export interface FAQItemData {
   question: string;
@@ -47,9 +49,15 @@ export function FAQItem({
         className="flex items-center justify-between w-full py-5 md:py-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500/50 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 rounded-md transition-colors duration-200"
         aria-expanded={isOpen}
       >
-        <span className="text-lg md:text-xl font-medium text-gray-800 dark:text-gray-100 group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors duration-200 pr-4">
+        <Heading
+          level={3}
+          size="lg"
+          variant="card"
+          weight="medium"
+          className="text-gray-800 dark:text-gray-100 group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors duration-200 pr-4"
+        >
           {faq.question}
-        </span>
+        </Heading>
         <ChevronDown
           className={cn(
             "w-6 h-6 text-green-700 dark:text-green-400 transform transition-transform duration-300 ease-in-out flex-shrink-0",
@@ -81,8 +89,14 @@ export function FAQItem({
             }}
             className="overflow-hidden"
           >
-            <div className="pt-1 pb-6 text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-              {faq.answer}
+            <div className="pt-1 pb-6">
+              <Description
+                variant="card"
+                size="lg"
+                className="text-gray-600 dark:text-gray-400"
+              >
+                {faq.answer}
+              </Description>
             </div>
           </motion.div>
         )}

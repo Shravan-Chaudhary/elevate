@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 import { FeatureItem, BaseComponentProps } from "@/types/components";
 import { IconContainer } from "../shared/icon-container";
+import { Heading } from "./heading";
+import { Description } from "./description";
 
 interface FeatureCardProps extends BaseComponentProps {
   feature: FeatureItem;
@@ -38,12 +40,17 @@ export function FeatureCard({
           </IconContainer>
 
           <div className="space-y-2">
-            <h3 className="text-xl font-semibold text-gray-900">
+            <Heading
+              level={3}
+              size="xl"
+              variant="card"
+              className="text-gray-900"
+            >
               {feature.title}
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
+            </Heading>
+            <Description variant="card" size="md" className="text-gray-600">
               {feature.description}
-            </p>
+            </Description>
           </div>
         </div>
       </div>
@@ -80,8 +87,18 @@ export function FeatureCard({
         </div>
 
         <div className="md:col-span-4 space-y-3">
-          <h3 className="text-2xl font-bold text-gray-900">{feature.title}</h3>
-          <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+          <Heading
+            level={3}
+            size="2xl"
+            variant="card"
+            weight="bold"
+            className="text-gray-900"
+          >
+            {feature.title}
+          </Heading>
+          <Description variant="feature" size="md" className="text-gray-600">
+            {feature.description}
+          </Description>
         </div>
       </div>
     </div>

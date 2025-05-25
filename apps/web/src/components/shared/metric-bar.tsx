@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 import { MetricData, AnimationProps } from "@/types/components";
 
 interface MetricBarProps extends AnimationProps {
@@ -29,7 +30,6 @@ export function MetricBar({
   metric,
   isVisible = true,
   delay = 0,
-  duration = 1000,
   className,
 }: MetricBarProps) {
   const colors = colorClasses[metric.color];
@@ -43,16 +43,16 @@ export function MetricBar({
         </div>
       </div>
       <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-        <div
-          className={cn(
-            "h-full rounded-full transition-all ease-in-out",
-            colors.bar,
-            isVisible ? "opacity-100" : "opacity-0",
-          )}
-          style={{
+        <motion.div
+          className={cn("h-full rounded-full", colors.bar)}
+          initial={{ width: "0%" }}
+          animate={{
             width: isVisible ? `${metric.percentage}%` : "0%",
-            transitionDelay: `${delay}ms`,
-            transitionDuration: `${duration}ms`,
+          }}
+          transition={{
+            duration: 1.7,
+            delay: delay / 1000,
+            ease: [0.25, 0.1, 0.25, 1.0], // Custom bezier curve
           }}
         />
       </div>

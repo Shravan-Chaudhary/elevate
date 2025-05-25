@@ -1,8 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { Section } from "@/components/shared/section";
 import { Heading } from "@/components/shared/heading";
+import { Description } from "@/components/shared/description";
 import { GradientBackground } from "@/components/shared/gradient-background";
 import { TestimonialCard } from "@/components/shared/testimonial-card";
 import { TestimonialData } from "@/types/components";
@@ -71,70 +73,196 @@ const testimonialsData: TestimonialData[] = [
 ];
 
 export function Testimonials() {
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-    },
-  };
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
     <Section
       variant="default"
       background="subtle"
-      className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-green-50/70 dark:from-slate-900 dark:to-green-900/30"
+      className="relative overflow-hidden bg-gradient-to-br from-slate-50/50 via-white to-green-50/30 dark:from-slate-900/90 dark:via-slate-800/50 dark:to-green-900/20"
       id="testimonials"
     >
-      <GradientBackground variant="section" className="absolute inset-0" />
-
-      {/* Decorative background elements */}
+      {/* Enhanced background patterns */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute left-[50%] top-0 h-[1000px] w-[1000px] -translate-x-[50%] -translate-y-[20%] [mask-image:radial-gradient(closest-side,white_50%,transparent_100%)] dark:[mask-image:radial-gradient(closest-side,black_50%,transparent_100%)] pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-r from-green-100/50 to-emerald-100/50 opacity-40 dark:from-green-800/30 dark:to-emerald-800/30 dark:opacity-30" />
-        </div>
-        <div className="absolute -right-[10%] top-[20%] h-[300px] w-[400px] rounded-full bg-amber-500/10 blur-3xl dark:bg-amber-500/5 pointer-events-none"></div>
-        <div className="absolute -left-[5%] bottom-[15%] h-[250px] w-[350px] rounded-full bg-green-500/10 blur-3xl dark:bg-green-500/5 pointer-events-none"></div>
-        <div className='absolute -z-20 inset-0 bg-[url("/grid-pattern.svg")] bg-center opacity-[0.07] dark:opacity-[0.03] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] dark:[mask-image:linear-gradient(180deg,black,rgba(0,0,0,0))] pointer-events-none'></div>
+        {/* Main gradient orb */}
+        <motion.div
+          className="absolute left-1/2 top-1/4 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-green-400/10 via-emerald-300/5 to-teal-400/10 blur-3xl dark:from-green-500/10 dark:via-emerald-400/5 dark:to-teal-500/10"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Floating accent elements */}
+        <motion.div
+          className="absolute right-[10%] top-[20%] h-40 w-40 rounded-full bg-gradient-to-br from-amber-300/20 to-orange-300/20 blur-2xl dark:from-amber-400/10 dark:to-orange-400/10"
+          animate={{
+            y: [-20, 20, -20],
+            x: [-10, 10, -10],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.div
+          className="absolute left-[15%] bottom-[25%] h-32 w-32 rounded-full bg-gradient-to-br from-green-300/20 to-emerald-300/20 blur-2xl dark:from-green-400/10 dark:to-emerald-400/10"
+          animate={{
+            y: [20, -20, 20],
+            x: [10, -10, 10],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.03] dark:opacity-[0.02] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_90%)]" />
       </div>
 
       <motion.div
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        ref={containerRef}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative z-10"
       >
+        {/* Header section with enhanced animations */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="flex flex-col items-center text-center mb-16 md:mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="text-center mb-20"
         >
-          <Heading
-            level={2}
-            size="4xl"
-            align="center"
-            className="text-green-900 dark:text-green-100 mb-4"
+          <motion.div
+            initial={{ scale: 0.95 }}
+            animate={isInView ? { scale: 1 } : { scale: 0.95 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+            className="relative inline-block"
           >
-            Loved by Job Seekers Everywhere
-          </Heading>
-          <p className="mt-2 max-w-2xl text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-            Hear directly from individuals who have transformed their interview
-            skills and confidence with Elevate.
-          </p>
+            <Heading
+              level={2}
+              size="3xl"
+              align="center"
+              variant="section"
+              className="relative mb-6"
+            >
+              <span className="relative z-10">
+                Loved by{" "}
+                <span className="relative">
+                  <span className="bg-gradient-to-r from-green-600 via-emerald-500 to-teal-500 bg-clip-text text-transparent">
+                    Job Seekers
+                  </span>
+                  <motion.div
+                    className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-green-500/40 via-emerald-400/40 to-teal-400/40 rounded-full"
+                    initial={{ width: 0 }}
+                    animate={isInView ? { width: "100%" } : { width: 0 }}
+                    transition={{ duration: 1, ease: "easeOut", delay: 0.8 }}
+                  />
+                </span>{" "}
+                Everywhere
+              </span>
+            </Heading>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+          >
+            <Description
+              variant="section"
+              align="center"
+              size="lg"
+              maxWidth="3xl"
+            >
+              Join thousands of professionals who have transformed their
+              interview skills and landed their dream jobs with Elevate's
+              AI-powered coaching.
+            </Description>
+          </motion.div>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {/* Testimonials grid with enhanced layout */}
+        <div className="grid gap-8 md:gap-10 lg:gap-12 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
           {testimonialsData.map((testimonial, index) => (
-            <TestimonialCard
+            <motion.div
               key={index}
-              testimonial={testimonial}
-              index={index}
-            />
+              initial={{
+                opacity: 0,
+                y: 40,
+                scale: 0.95,
+              }}
+              animate={
+                isInView
+                  ? {
+                      opacity: 1,
+                      y: 0,
+                      scale: 1,
+                    }
+                  : {
+                      opacity: 0,
+                      y: 40,
+                      scale: 0.95,
+                    }
+              }
+              transition={{
+                duration: 0.7,
+                ease: "easeOut",
+                delay: 0.8 + index * 0.1,
+              }}
+            >
+              <TestimonialCard testimonial={testimonial} index={index} />
+            </motion.div>
           ))}
         </div>
+
+        {/* Bottom accent with floating elements */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 1.5 }}
+          className="text-center mt-20"
+        >
+          <div className="flex items-center justify-center space-x-2 text-sm text-slate-500 dark:text-slate-500">
+            <motion.div
+              className="w-2 h-2 bg-green-400 rounded-full"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <span>Join 10,000+ professionals who practice with Elevate</span>
+            <motion.div
+              className="w-2 h-2 bg-emerald-400 rounded-full"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5,
+              }}
+            />
+          </div>
+        </motion.div>
       </motion.div>
     </Section>
   );

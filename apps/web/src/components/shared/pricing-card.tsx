@@ -11,6 +11,8 @@ import {
 import { Check } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Heading } from "./heading";
+import { Description } from "./description";
 
 export interface PricingTierData {
   name: string;
@@ -55,9 +57,19 @@ export function PricingCard({ tier, className, index = 0 }: PricingCardProps) {
             {tier.badge}
           </Badge>
         )}
-        <CardTitle className="text-2xl font-bold">{tier.name}</CardTitle>
-        <CardDescription className="text-muted-foreground leading-relaxed">
-          {tier.description}
+        <CardTitle>
+          <Heading level={3} size="2xl" variant="card" weight="bold">
+            {tier.name}
+          </Heading>
+        </CardTitle>
+        <CardDescription>
+          <Description
+            variant="card"
+            size="md"
+            className="text-muted-foreground"
+          >
+            {tier.description}
+          </Description>
         </CardDescription>
       </CardHeader>
 

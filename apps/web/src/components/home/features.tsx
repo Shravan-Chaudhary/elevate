@@ -2,6 +2,7 @@ import InterviewAnalysisCard from "@/components/home/interview-analysis-card";
 import { Section } from "@/components/shared/section";
 import { Container } from "@/components/shared/container";
 import { Heading } from "@/components/shared/heading";
+import { Description } from "@/components/shared/description";
 import { FeatureCard } from "@/components/shared/feature-card";
 import { CTAButtons } from "@/components/shared/cta-buttons";
 import { FeatureItem } from "@/types/components";
@@ -46,20 +47,31 @@ export function Features() {
           <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         </div>
 
-        <div className="flex flex-col items-center max-w-3xl mx-auto mb-20 text-center animate-fade-in">
-          <Heading level={2} size="3xl" align="center" className="mb-6">
-            Innovative tools to help you
+        <div className="flex flex-col items-center max-w-4xl mx-auto mb-20 text-center animate-fade-in">
+          <Heading
+            level={2}
+            size="3xl"
+            align="center"
+            variant="section"
+            className="mb-6"
+          >
+            Innovative tools to help you{" "}
             <span className="relative inline-block ml-2">
               <span className="relative z-10">master interviews</span>
-              <span className="absolute bottom-1 left-0 w-full h-3 bg-green-200/60 -z-10 rounded"></span>
+              <span className="absolute bottom-1 left-0 w-full h-3 bg-green-200/60 dark:bg-green-400/20 -z-10 rounded"></span>
             </span>
           </Heading>
 
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <Description
+            variant="section"
+            align="center"
+            maxWidth="3xl"
+            className="text-xl"
+          >
             Our platform combines cutting-edge AI technology with proven
             interview techniques to help you prepare, practice, and perfect your
             interview skills.
-          </p>
+          </Description>
         </div>
 
         <div className="space-y-12 md:space-y-24">
