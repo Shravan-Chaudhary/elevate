@@ -31,7 +31,7 @@ export function FeatureCard({
         )}
       >
         {animated && (
-          <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-green-600/15 to-emerald-600/15 opacity-0 group-hover:opacity-100 blur-lg transition-all duration-300" />
+          <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-green-900/15 to-green-800/15 opacity-0 group-hover:opacity-100 blur-lg transition-all duration-300" />
         )}
 
         <div className="relative space-y-4">
@@ -66,7 +66,7 @@ export function FeatureCard({
       )}
     >
       {animated && (
-        <div className="w-full h-full absolute -inset-1 rounded-3xl bg-gradient-to-r from-green-600/15 to-emerald-600/15 opacity-30 blur-lg group-hover:opacity-50 transition-all duration-500 group-hover:duration-200" />
+        <div className="w-full h-full absolute -inset-1 rounded-3xl bg-gradient-to-r from-green-900/15 to-green-800/15 opacity-30 blur-lg group-hover:opacity-50 transition-all duration-500 group-hover:duration-200" />
       )}
 
       <div className="relative grid gap-6 items-center md:grid-cols-5 p-6">
@@ -81,7 +81,7 @@ export function FeatureCard({
               {feature.icon}
             </div>
             {animated && (
-              <div className="absolute -inset-4 bg-green-600/10 rounded-full blur-xl animate-pulse opacity-0 group-hover:opacity-70 transition-opacity duration-500" />
+              <div className="absolute -inset-4 bg-green-900/10 rounded-full blur-xl animate-pulse opacity-0 group-hover:opacity-70 transition-opacity duration-500" />
             )}
           </div>
         </div>

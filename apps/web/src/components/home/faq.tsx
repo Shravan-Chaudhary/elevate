@@ -10,6 +10,7 @@ import { IconContainer } from "@/components/shared/icon-container";
 import { GradientBackground } from "@/components/shared/gradient-background";
 import { FAQItem } from "@/components/shared/faq-item";
 import { FAQItemData } from "@/types/components";
+import { fadeUp, fadeIn, stagger, smooth } from "@/lib/animations";
 
 const faqData: FAQItemData[] = [
   {
@@ -51,14 +52,6 @@ export function Faq() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.5, delayChildren: 0.2, staggerChildren: 0.1 },
-    },
-  };
-
   return (
     <Section
       variant="default"
@@ -69,32 +62,62 @@ export function Faq() {
       <GradientBackground variant="section" className="absolute inset-0" />
 
       {/* Subtle background patterns */}
-      <div className="absolute inset-0 -z-10 opacity-50 dark:opacity-30">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(150,220,150,0.03)_0%,_transparent_60%)] dark:bg-[radial-gradient(circle_at_center,_rgba(30,100,50,0.05)_0%,_transparent_70%)] [mask-image:linear-gradient(transparent,white,transparent)]"></div>
-      </div>
-
       <motion.div
-        variants={sectionVariants}
+        className="absolute inset-0 -z-10 opacity-50 dark:opacity-30"
+        variants={fadeIn}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{ once: true }}
+      >
+        <motion.div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(150,220,150,0.03)_0%,_transparent_60%)] dark:bg-[radial-gradient(circle_at_center,_rgba(30,100,50,0.05)_0%,_transparent_70%)] [mask-image:linear-gradient(transparent,white,transparent)]"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.5, 0.3, 0.5],
+          }}
+          transition={{
+            duration: 8,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        ></motion.div>
+      </motion.div>
+
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
         className="relative z-10"
       >
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
           className="flex flex-col items-center text-center mb-12 md:mb-16"
+          variants={fadeUp}
         >
-          <IconContainer
-            size="xl"
-            variant="solid"
-            color="primary"
-            className="mb-6"
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            whileInView={{
+              scale: 1,
+              rotate: 0,
+              transition: {
+                type: "spring",
+                stiffness: 200,
+                damping: 15,
+                delay: 0.2,
+              },
+            }}
+            viewport={{ once: true }}
           >
-            <HelpCircle className="h-6 w-6" />
-          </IconContainer>
+            <IconContainer
+              size="xl"
+              variant="solid"
+              color="primary"
+              className="mb-6"
+            >
+              <HelpCircle className="h-6 w-6" />
+            </IconContainer>
+          </motion.div>
 
           <Heading
             level={2}
@@ -121,17 +144,22 @@ export function Faq() {
         </motion.div>
 
         <motion.div
-          variants={sectionVariants}
           className="bg-white/70 dark:bg-slate-800/50 backdrop-blur-md shadow-xl shadow-green-900/5 dark:shadow-black/10 rounded-2xl p-1 md:p-2 max-w-3xl mx-auto"
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
         >
           {faqData.map((item, index) => (
-            <FAQItem
-              key={index}
-              index={index}
-              faq={item}
-              isOpen={openIndex === index}
-              onClick={() => handleItemClick(index)}
-            />
+            <motion.div key={index} variants={fadeUp}>
+              <FAQItem
+                key={index}
+                index={index}
+                faq={item}
+                isOpen={openIndex === index}
+                onClick={() => handleItemClick(index)}
+              />
+            </motion.div>
           ))}
         </motion.div>
       </motion.div>

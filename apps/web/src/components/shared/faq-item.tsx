@@ -40,13 +40,13 @@ export function FAQItem({
     <motion.div
       variants={itemVariants}
       className={cn(
-        "border-b border-green-200/30 dark:border-green-800/30 last:border-b-0 group",
+        "border-b border-slate-200/60 dark:border-slate-700/60 last:border-b-0 group",
         className,
       )}
     >
       <button
         onClick={onClick}
-        className="flex items-center justify-between w-full py-5 md:py-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500/50 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 rounded-md transition-colors duration-200"
+        className="flex items-center justify-between w-full py-5 md:py-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-green-900/50 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 rounded-md transition-colors duration-200"
         aria-expanded={isOpen}
       >
         <Heading
@@ -54,13 +54,13 @@ export function FAQItem({
           size="lg"
           variant="card"
           weight="medium"
-          className="text-gray-800 dark:text-gray-100 group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors duration-200 pr-4"
+          className="text-gray-800 dark:text-gray-100 group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200 pr-4"
         >
           {faq.question}
         </Heading>
         <ChevronDown
           className={cn(
-            "w-6 h-6 text-green-700 dark:text-green-400 transform transition-transform duration-300 ease-in-out flex-shrink-0",
+            "w-6 h-6 text-slate-600 dark:text-slate-400 transform transition-transform duration-300 ease-in-out flex-shrink-0",
             isOpen ? "rotate-180" : "rotate-0",
           )}
         />

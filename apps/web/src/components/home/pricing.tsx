@@ -9,6 +9,7 @@ import { Description } from "@/components/shared/description";
 import { GradientBackground } from "@/components/shared/gradient-background";
 import { PricingCard } from "@/components/shared/pricing-card";
 import { PricingTierData } from "@/types/components";
+import { fadeUp, fadeIn, stagger, smooth } from "@/lib/animations";
 
 export function Pricing() {
   const tiers: PricingTierData[] = [
@@ -65,23 +66,6 @@ export function Pricing() {
     },
   ];
 
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
-    },
-  };
-
   return (
     <Section
       variant="default"
@@ -92,25 +76,52 @@ export function Pricing() {
       <GradientBackground variant="section" className="absolute inset-0" />
 
       {/* Decorative background elements */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute w-[40rem] h-[40rem] rounded-full bg-green-800/5 dark:bg-green-400/5 -top-[10rem] -right-[10rem] blur-3xl"></div>
-        <div className="absolute w-[30rem] h-[30rem] rounded-full bg-emerald-800/5 dark:bg-emerald-400/5 top-[30rem] -left-[10rem] blur-3xl"></div>
+      <motion.div
+        className="absolute inset-0 -z-10 overflow-hidden"
+        variants={fadeIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <motion.div
+          className="absolute w-[40rem] h-[40rem] rounded-full bg-green-800/5 dark:bg-green-400/5 -top-[10rem] -right-[10rem] blur-3xl"
+          animate={{
+            x: [0, -20, 0],
+            y: [0, 10, 0],
+          }}
+          transition={{
+            duration: 12,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        ></motion.div>
+        <motion.div
+          className="absolute w-[30rem] h-[30rem] rounded-full bg-emerald-800/5 dark:bg-emerald-400/5 top-[30rem] -left-[10rem] blur-3xl"
+          animate={{
+            x: [0, 25, 0],
+            y: [0, -15, 0],
+          }}
+          transition={{
+            duration: 10,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        ></motion.div>
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.02] dark:opacity-[0.01] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] dark:[mask-image:linear-gradient(180deg,black,rgba(0,0,0,0))]"></div>
-      </div>
+      </motion.div>
 
       <motion.div
-        variants={sectionVariants}
+        variants={stagger}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         className="relative z-10"
       >
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
           className="flex flex-col items-center text-center mb-16 md:mb-20"
+          variants={fadeUp}
         >
           <Heading
             level={2}
@@ -136,25 +147,33 @@ export function Pricing() {
           </Description>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
+        <motion.div
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16"
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {tiers.map((tier, index) => (
-            <motion.div
-              key={tier.name}
-              variants={cardVariants}
-              className="animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
+            <motion.div key={tier.name} variants={fadeUp}>
               <PricingCard tier={tier} index={index} />
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
           className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 0.6,
+              ease: smooth,
+              delay: 0.2,
+            },
+          }}
+          viewport={{ once: true }}
         >
           <Heading level={3} size="xl" align="center" className="mb-4">
             Need something different?

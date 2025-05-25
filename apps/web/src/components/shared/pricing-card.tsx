@@ -86,7 +86,7 @@ export function PricingCard({ tier, className, index = 0 }: PricingCardProps) {
         <ul className="space-y-3">
           {tier.features.map((feature, featureIndex) => (
             <li key={featureIndex} className="flex items-start group/feature">
-              <Check className="h-5 w-5 text-green-500 mr-3 shrink-0 mt-0.5 transition-colors group-hover/feature:text-green-600" />
+              <Check className="h-5 w-5 text-green-900 mr-3 shrink-0 mt-0.5 transition-colors group-hover/feature:text-green-800" />
               <span className="text-sm leading-relaxed">{feature}</span>
             </li>
           ))}
@@ -100,8 +100,8 @@ export function PricingCard({ tier, className, index = 0 }: PricingCardProps) {
           className={cn(
             "w-full transition-all duration-300",
             tier.highlighted
-              ? "bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-600/25 hover:shadow-xl hover:shadow-green-600/30"
-              : "hover:bg-green-50 dark:hover:bg-green-950/30",
+              ? "bg-green-900 hover:bg-green-800 text-white shadow-lg shadow-green-900/25 hover:shadow-xl hover:shadow-green-900/30"
+              : "hover:bg-slate-50 dark:hover:bg-slate-800/50",
           )}
         >
           <Link href={href}>{tier.buttonText}</Link>

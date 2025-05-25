@@ -193,75 +193,182 @@ export function Testimonials() {
           </motion.div>
         </motion.div>
 
-        {/* Testimonials grid with enhanced layout */}
-        <div className="grid gap-8 md:gap-10 lg:gap-12 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-          {testimonialsData.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{
-                opacity: 0,
-                y: 40,
-                scale: 0.95,
-              }}
-              animate={
-                isInView
-                  ? {
-                      opacity: 1,
-                      y: 0,
-                      scale: 1,
-                    }
-                  : {
-                      opacity: 0,
-                      y: 40,
-                      scale: 0.95,
-                    }
-              }
-              transition={{
-                duration: 0.7,
-                ease: "easeOut",
-                delay: 0.8 + index * 0.1,
-              }}
-            >
-              <TestimonialCard testimonial={testimonial} index={index} />
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Bottom accent with floating elements */}
+        {/* Testimonials grid with enhanced modern layout */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 1.5 }}
-          className="text-center mt-20"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
+          className="relative"
         >
-          <div className="flex items-center justify-center space-x-2 text-sm text-slate-500 dark:text-slate-500">
+          {/* Grid container with staggered animation */}
+          <div className="grid gap-6 md:gap-8 lg:gap-10 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+            {testimonialsData.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{
+                  opacity: 0,
+                  y: 60,
+                  scale: 0.9,
+                  rotateY: 10,
+                }}
+                animate={
+                  isInView
+                    ? {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        rotateY: 0,
+                      }
+                    : {
+                        opacity: 0,
+                        y: 60,
+                        scale: 0.9,
+                        rotateY: 10,
+                      }
+                }
+                transition={{
+                  duration: 0.8,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  delay: 1.0 + index * 0.15,
+                }}
+                whileHover={{
+                  y: -8,
+                  rotateY: -2,
+                  transition: { duration: 0.3, ease: "easeOut" },
+                }}
+                className="perspective-1000"
+              >
+                <TestimonialCard testimonial={testimonial} index={index} />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Floating background elements */}
+          <div className="absolute -z-10 inset-0 overflow-hidden pointer-events-none">
             <motion.div
-              className="w-2 h-2 bg-green-400 rounded-full"
+              className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-green-100/30 to-emerald-100/20 dark:from-green-900/20 dark:to-emerald-800/10 rounded-full blur-2xl"
               animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 1, 0.5],
+                x: [0, 30, 0],
+                y: [0, -20, 0],
+                scale: [1, 1.1, 1],
               }}
               transition={{
-                duration: 2,
+                duration: 20,
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
             />
-            <span>Join 10,000+ professionals who practice with Elevate</span>
             <motion.div
-              className="w-2 h-2 bg-emerald-400 rounded-full"
+              className="absolute top-40 right-16 w-24 h-24 bg-gradient-to-br from-blue-100/30 to-indigo-100/20 dark:from-blue-900/20 dark:to-indigo-800/10 rounded-full blur-2xl"
               animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 1, 0.5],
+                x: [0, -25, 0],
+                y: [0, 15, 0],
+                scale: [1, 0.9, 1],
               }}
               transition={{
-                duration: 2,
+                duration: 25,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: 0.5,
+                delay: 5,
+              }}
+            />
+            <motion.div
+              className="absolute bottom-32 left-1/4 w-20 h-20 bg-gradient-to-br from-purple-100/30 to-pink-100/20 dark:from-purple-900/20 dark:to-pink-800/10 rounded-full blur-2xl"
+              animate={{
+                x: [0, 20, 0],
+                y: [0, -30, 0],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 10,
               }}
             />
           </div>
+        </motion.div>
+
+        {/* Enhanced bottom section with metrics */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 2.0 }}
+          className="text-center mt-24"
+        >
+          {/* Metrics cards */}
+          <div className="flex flex-wrap justify-center gap-8 mb-12">
+            {[
+              { number: "10,000+", label: "Active Users" },
+              { number: "95%", label: "Success Rate" },
+              { number: "4.9/5", label: "User Rating" },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={
+                  isInView
+                    ? { opacity: 1, scale: 1 }
+                    : { opacity: 0, scale: 0.8 }
+                }
+                transition={{
+                  duration: 0.6,
+                  ease: "easeOut",
+                  delay: 2.2 + index * 0.1,
+                }}
+                className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50"
+              >
+                <div className="text-2xl font-bold text-green-900 dark:text-green-100 mb-1">
+                  {stat.number}
+                </div>
+                <div className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Call to action */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 2.5 }}
+            className="relative"
+          >
+            <div className="flex items-center justify-center space-x-3 text-slate-600 dark:text-slate-400">
+              <motion.div
+                className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full"
+                animate={{
+                  scale: [1, 1.4, 1],
+                  opacity: [0.6, 1, 0.6],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <span className="text-base font-medium">
+                Trusted by professionals at top companies worldwide
+              </span>
+              <motion.div
+                className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full"
+                animate={{
+                  scale: [1, 1.4, 1],
+                  opacity: [0.6, 1, 0.6],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.8,
+                }}
+              />
+            </div>
+
+            {/* Subtle background glow */}
+            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-transparent via-green-100/20 to-transparent dark:via-green-900/10 blur-xl rounded-full" />
+          </motion.div>
         </motion.div>
       </motion.div>
     </Section>

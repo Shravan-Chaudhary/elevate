@@ -9,8 +9,8 @@ interface MetricBarProps extends AnimationProps {
 
 const colorClasses = {
   green: {
-    text: "text-green-700",
-    bar: "bg-green-500",
+    text: "text-green-900 dark:text-green-100",
+    bar: "bg-green-900",
   },
   amber: {
     text: "text-amber-600",
