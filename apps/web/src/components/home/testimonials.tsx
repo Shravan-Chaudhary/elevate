@@ -1,21 +1,15 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent } from "@/components/ui/card";
-import { QuoteIcon, Star } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { Section } from "@/components/shared/section";
+import { Heading } from "@/components/shared/heading";
+import { Description } from "@/components/shared/description";
+import { GradientBackground } from "@/components/shared/gradient-background";
+import { TestimonialCard } from "@/components/shared/testimonial-card";
+import { TestimonialData } from "@/types/components";
 
-interface Testimonial {
-  quote: string;
-  author: {
-    name: string;
-    role: string;
-    avatar?: string;
-  };
-  rating: number;
-}
-
-const testimonialsData: Testimonial[] = [
+const testimonialsData: TestimonialData[] = [
   {
     quote:
       "Elevate has become indispensable for my interview prep. The AI feedback feels like having a personal coach, and the insights have significantly improved my confidence.",
@@ -78,119 +72,305 @@ const testimonialsData: Testimonial[] = [
   },
 ];
 
-function TestimonialStars({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center text-amber-400 mb-4">
-      {[...Array(5)].map((_, i) => (
-        <Star
-          key={i}
-          className={`h-5 w-5 ${
-            i < rating ? "fill-amber-400" : "fill-gray-300 dark:fill-gray-600"
-          }`}
-          strokeWidth={i < rating ? 0 : 1}
-        />
-      ))}
-    </div>
-  );
-}
-
 export function Testimonials() {
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
-    },
-  };
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <motion.section
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      className="relative py-28 overflow-hidden bg-gradient-to-br from-gray-50 to-green-50/70 dark:from-slate-900 dark:to-green-900/30"
+    <Section
+      variant="default"
+      background="subtle"
+      className="relative overflow-hidden bg-gradient-to-br from-slate-50/50 via-white to-green-50/30 dark:from-slate-900/90 dark:via-slate-800/50 dark:to-green-900/20"
       id="testimonials"
     >
-      {/* Decorative background from Hero component (adapted) */}
+      {/* Enhanced background patterns */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute left-[50%] top-0 h-[1000px] w-[1000px] -translate-x-[50%] -translate-y-[20%] [mask-image:radial-gradient(closest-side,white_50%,transparent_100%)] dark:[mask-image:radial-gradient(closest-side,black_50%,transparent_100%)] pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-r from-green-100/50 to-emerald-100/50 opacity-40 dark:from-green-800/30 dark:to-emerald-800/30 dark:opacity-30" />
-        </div>
-        <div className="absolute -right-[10%] top-[20%] h-[300px] w-[400px] rounded-full bg-amber-500/10 blur-3xl dark:bg-amber-500/5 pointer-events-none"></div>
-        <div className="absolute -left-[5%] bottom-[15%] h-[250px] w-[350px] rounded-full bg-green-500/10 blur-3xl dark:bg-green-500/5 pointer-events-none"></div>
-        <div className='absolute -z-20 inset-0 bg-[url("/grid-pattern.svg")] bg-center opacity-[0.07] dark:opacity-[0.03] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] dark:[mask-image:linear-gradient(180deg,black,rgba(0,0,0,0))] pointer-events-none'></div>
+        {/* Main gradient orb */}
+        <motion.div
+          className="absolute left-1/2 top-1/4 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-green-400/10 via-emerald-300/5 to-teal-400/10 blur-3xl dark:from-green-500/10 dark:via-emerald-400/5 dark:to-teal-500/10"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Floating accent elements */}
+        <motion.div
+          className="absolute right-[10%] top-[20%] h-40 w-40 rounded-full bg-gradient-to-br from-amber-300/20 to-orange-300/20 blur-2xl dark:from-amber-400/10 dark:to-orange-400/10"
+          animate={{
+            y: [-20, 20, -20],
+            x: [-10, 10, -10],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.div
+          className="absolute left-[15%] bottom-[25%] h-32 w-32 rounded-full bg-gradient-to-br from-green-300/20 to-emerald-300/20 blur-2xl dark:from-green-400/10 dark:to-emerald-400/10"
+          animate={{
+            y: [20, -20, 20],
+            x: [10, -10, 10],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.03] dark:opacity-[0.02] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_90%)]" />
       </div>
 
-      <div className="container max-w-6xl mx-auto px-4 md:px-6">
+      <motion.div
+        ref={containerRef}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10"
+      >
+        {/* Header section with enhanced animations */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="flex flex-col items-center text-center mb-16 md:mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-green-900 dark:text-green-100 mb-4">
-            Loved by Job Seekers Everywhere
-          </h2>
-          <p className="mt-2 max-w-2xl text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-            Hear directly from individuals who have transformed their interview
-            skills and confidence with Elevate.
-          </p>
+          <motion.div
+            initial={{ scale: 0.95 }}
+            animate={isInView ? { scale: 1 } : { scale: 0.95 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+            className="relative inline-block"
+          >
+            <Heading
+              level={2}
+              size="3xl"
+              align="center"
+              variant="section"
+              className="relative mb-6"
+            >
+              <span className="relative z-10">
+                Loved by{" "}
+                <span className="relative">
+                  <span className="bg-gradient-to-r from-green-600 via-emerald-500 to-teal-500 bg-clip-text text-transparent">
+                    Job Seekers
+                  </span>
+                  <motion.div
+                    className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-green-500/40 via-emerald-400/40 to-teal-400/40 rounded-full"
+                    initial={{ width: 0 }}
+                    animate={isInView ? { width: "100%" } : { width: 0 }}
+                    transition={{ duration: 1, ease: "easeOut", delay: 0.8 }}
+                  />
+                </span>{" "}
+                Everywhere
+              </span>
+            </Heading>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+          >
+            <Description
+              variant="section"
+              align="center"
+              size="lg"
+              maxWidth="3xl"
+            >
+              Join thousands of professionals who have transformed their
+              interview skills and landed their dream jobs with Elevate's
+              AI-powered coaching.
+            </Description>
+          </motion.div>
         </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {testimonialsData.map((testimonial, index) => (
-            <motion.div key={index} variants={cardVariants}>
-              <Card className="h-full flex flex-col bg-white/80 dark:bg-slate-800/60 backdrop-blur-md border-gray-200/70 dark:border-slate-700/50 shadow-xl shadow-green-900/5 dark:shadow-black/20 hover:shadow-green-900/10 dark:hover:shadow-black/30 rounded-2xl hover:scale-[1.03] transition-all duration-300 ease-in-out overflow-hidden">
-                <CardContent className="p-6 md:p-8 flex flex-col flex-grow">
-                  <TestimonialStars rating={testimonial.rating} />
-                  <div className="relative mb-6 flex-grow">
-                    <QuoteIcon className="h-10 w-10 text-green-200/80 dark:text-green-700/50 absolute -top-2 -left-3 transform -translate-x-1/2 opacity-70" />
-                    <p className="text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed font-medium relative z-10 italic">
-                      &ldquo;{testimonial.quote}&rdquo;
-                    </p>
-                  </div>
-                  <div className="flex items-center mt-auto pt-4 border-t border-gray-200/70 dark:border-slate-700/50">
-                    <Avatar className="h-11 w-11 mr-4 shadow-sm border border-gray-200 dark:border-slate-700">
-                      {testimonial.author.avatar ? (
-                        <AvatarImage
-                          src={testimonial.author.avatar}
-                          alt={testimonial.author.name}
-                          className="object-cover"
-                        />
-                      ) : null}
-                      <AvatarFallback className="bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100 font-semibold">
-                        {testimonial.author.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-semibold text-green-800 dark:text-green-200">
-                        {testimonial.author.name}
-                      </p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {testimonial.author.role}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </motion.section>
+        {/* Testimonials grid with enhanced modern layout */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
+          className="relative"
+        >
+          {/* Grid container with staggered animation */}
+          <div className="grid gap-6 md:gap-8 lg:gap-10 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+            {testimonialsData.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{
+                  opacity: 0,
+                  y: 60,
+                  scale: 0.9,
+                  rotateY: 10,
+                }}
+                animate={
+                  isInView
+                    ? {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        rotateY: 0,
+                      }
+                    : {
+                        opacity: 0,
+                        y: 60,
+                        scale: 0.9,
+                        rotateY: 10,
+                      }
+                }
+                transition={{
+                  duration: 0.8,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  delay: 1.0 + index * 0.15,
+                }}
+                whileHover={{
+                  y: -8,
+                  rotateY: -2,
+                  transition: { duration: 0.3, ease: "easeOut" },
+                }}
+                className="perspective-1000"
+              >
+                <TestimonialCard testimonial={testimonial} index={index} />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Floating background elements */}
+          <div className="absolute -z-10 inset-0 overflow-hidden pointer-events-none">
+            <motion.div
+              className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-green-100/30 to-emerald-100/20 dark:from-green-900/20 dark:to-emerald-800/10 rounded-full blur-2xl"
+              animate={{
+                x: [0, 30, 0],
+                y: [0, -20, 0],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <motion.div
+              className="absolute top-40 right-16 w-24 h-24 bg-gradient-to-br from-blue-100/30 to-indigo-100/20 dark:from-blue-900/20 dark:to-indigo-800/10 rounded-full blur-2xl"
+              animate={{
+                x: [0, -25, 0],
+                y: [0, 15, 0],
+                scale: [1, 0.9, 1],
+              }}
+              transition={{
+                duration: 25,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 5,
+              }}
+            />
+            <motion.div
+              className="absolute bottom-32 left-1/4 w-20 h-20 bg-gradient-to-br from-purple-100/30 to-pink-100/20 dark:from-purple-900/20 dark:to-pink-800/10 rounded-full blur-2xl"
+              animate={{
+                x: [0, 20, 0],
+                y: [0, -30, 0],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 10,
+              }}
+            />
+          </div>
+        </motion.div>
+
+        {/* Enhanced bottom section with metrics */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 2.0 }}
+          className="text-center mt-24"
+        >
+          {/* Metrics cards */}
+          <div className="flex flex-wrap justify-center gap-8 mb-12">
+            {[
+              { number: "10,000+", label: "Active Users" },
+              { number: "95%", label: "Success Rate" },
+              { number: "4.9/5", label: "User Rating" },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={
+                  isInView
+                    ? { opacity: 1, scale: 1 }
+                    : { opacity: 0, scale: 0.8 }
+                }
+                transition={{
+                  duration: 0.6,
+                  ease: "easeOut",
+                  delay: 2.2 + index * 0.1,
+                }}
+                className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50"
+              >
+                <div className="text-2xl font-bold text-green-900 dark:text-green-100 mb-1">
+                  {stat.number}
+                </div>
+                <div className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Call to action */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 2.5 }}
+            className="relative"
+          >
+            <div className="flex items-center justify-center space-x-3 text-slate-600 dark:text-slate-400">
+              <motion.div
+                className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full"
+                animate={{
+                  scale: [1, 1.4, 1],
+                  opacity: [0.6, 1, 0.6],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <span className="text-base font-medium">
+                Trusted by professionals at top companies worldwide
+              </span>
+              <motion.div
+                className="w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full"
+                animate={{
+                  scale: [1, 1.4, 1],
+                  opacity: [0.6, 1, 0.6],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.8,
+                }}
+              />
+            </div>
+
+            {/* Subtle background glow */}
+            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-transparent via-green-100/20 to-transparent dark:via-green-900/10 blur-xl rounded-full" />
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </Section>
   );
 }

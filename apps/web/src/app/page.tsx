@@ -1,6 +1,7 @@
 import { Features } from "@/components/home/features";
 import { Hero } from "@/components/home/hero";
 import { Testimonials } from "@/components/home/testimonials";
+import { Pricing } from "@/components/home/pricing";
 import { Faq } from "@/components/home/faq";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
       </div>
       <Features />
       <Testimonials />
+      <Pricing />
       <Faq />
     </main>
   );

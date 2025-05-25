@@ -1,19 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, HelpCircle } from "lucide-react";
-import { cn } from "@/lib/utils"; // Assuming you have a cn utility for classnames
+import { motion } from "framer-motion";
+import { HelpCircle } from "lucide-react";
+import { Section } from "@/components/shared/section";
+import { Heading } from "@/components/shared/heading";
+import { Description } from "@/components/shared/description";
+import { IconContainer } from "@/components/shared/icon-container";
+import { GradientBackground } from "@/components/shared/gradient-background";
+import { FAQItem } from "@/components/shared/faq-item";
+import { FAQItemData } from "@/types/components";
+import { fadeUp, fadeIn, stagger, smooth } from "@/lib/animations";
 
-interface FaqItemProps {
-  question: string;
-  answer: string;
-  isOpen: boolean;
-  onClick: () => void;
-  index: number;
-}
-
-const faqData = [
+const faqData: FAQItemData[] = [
   {
     question: "What is Elevate and how does it work?",
     answer:
@@ -46,75 +45,6 @@ const faqData = [
   },
 ];
 
-const FaqItem: React.FC<FaqItemProps> = ({
-  question,
-  answer,
-  isOpen,
-  onClick,
-  index,
-}) => {
-  const itemVariants = {
-    hidden: { opacity: 0, y: -10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3, delay: index * 0.05 },
-    },
-  };
-
-  return (
-    <motion.div
-      variants={itemVariants}
-      className="border-b border-green-200/30 dark:border-green-800/30 last:border-b-0"
-    >
-      <button
-        onClick={onClick}
-        className="flex items-center justify-between w-full py-5 md:py-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500/50 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 rounded-md"
-        aria-expanded={isOpen}
-      >
-        <span className="text-lg md:text-xl font-medium text-gray-800 dark:text-gray-100 group-hover:text-green-700 dark:group-hover:text-green-300 transition-colors duration-200">
-          {question}
-        </span>
-        <ChevronDown
-          className={cn(
-            "w-6 h-6 text-green-700 dark:text-green-400 transform transition-transform duration-300 ease-in-out",
-            isOpen ? "rotate-180" : "rotate-0",
-          )}
-        />
-      </button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="content"
-            initial="collapsed"
-            animate="open"
-            exit="collapsed"
-            variants={{
-              open: {
-                opacity: 1,
-                height: "auto",
-                marginTop: "0px",
-                transition: { duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] },
-              },
-              collapsed: {
-                opacity: 0,
-                height: 0,
-                marginTop: "0px",
-                transition: { duration: 0.25, ease: [0.04, 0.62, 0.23, 0.98] },
-              },
-            }}
-            className="overflow-hidden"
-          >
-            <p className="pt-1 pb-6 text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-              {answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-};
-
 export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -122,65 +52,117 @@ export function Faq() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const sectionVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.5, delayChildren: 0.2, staggerChildren: 0.1 },
-    },
-  };
-
   return (
-    <motion.section
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-green-50/30 to-white dark:from-green-900/20 dark:to-slate-900"
+    <Section
+      variant="default"
+      background="subtle"
+      className="relative overflow-hidden bg-gradient-to-b from-green-50/30 to-white dark:from-green-900/20 dark:to-slate-900"
       id="faq"
     >
-      {/* Subtle background patterns or elements if desired */}
-      <div className="absolute inset-0 -z-10 opacity-50 dark:opacity-30">
-        {/* Example: Soft repeating icon pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(150,220,150,0.03)_0%,_transparent_60%)] dark:bg-[radial-gradient(circle_at_center,_rgba(30,100,50,0.05)_0%,_transparent_70%)] [mask-image:linear-gradient(transparent,white,transparent)]"></div>
-      </div>
+      <GradientBackground variant="section" className="absolute inset-0" />
 
-      <div className="container max-w-3xl mx-auto px-4 md:px-6">
+      {/* Subtle background patterns */}
+      <motion.div
+        className="absolute inset-0 -z-10 opacity-50 dark:opacity-30"
+        variants={fadeIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(150,220,150,0.03)_0%,_transparent_60%)] dark:bg-[radial-gradient(circle_at_center,_rgba(30,100,50,0.05)_0%,_transparent_70%)] [mask-image:linear-gradient(transparent,white,transparent)]"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.5, 0.3, 0.5],
+          }}
+          transition={{
+            duration: 8,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        ></motion.div>
+      </motion.div>
+
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="relative z-10"
+      >
+        <motion.div
           className="flex flex-col items-center text-center mb-12 md:mb-16"
+          variants={fadeUp}
         >
-          <div className="mb-4">
-            <HelpCircle className="w-12 h-12 text-green-600 dark:text-green-400" />
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-50 mb-4">
-            Frequently Asked Questions
-          </h2>
-          <p className="mt-2 max-w-2xl text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            whileInView={{
+              scale: 1,
+              rotate: 0,
+              transition: {
+                type: "spring",
+                stiffness: 200,
+                damping: 15,
+                delay: 0.2,
+              },
+            }}
+            viewport={{ once: true }}
+          >
+            <IconContainer
+              size="xl"
+              variant="solid"
+              color="primary"
+              className="mb-6"
+            >
+              <HelpCircle className="h-6 w-6" />
+            </IconContainer>
+          </motion.div>
+
+          <Heading
+            level={2}
+            size="3xl"
+            align="center"
+            variant="section"
+            className="mb-6"
+          >
+            Frequently Asked{" "}
+            <span className="text-green-700 dark:text-green-400">
+              Questions
+            </span>
+          </Heading>
+
+          <Description
+            variant="section"
+            align="center"
+            size="xl"
+            maxWidth="2xl"
+          >
             Find answers to common questions about Elevate, its features, and
             how it can help you succeed.
-          </p>
+          </Description>
         </motion.div>
 
         <motion.div
-          variants={sectionVariants} // Use same variants for the list wrapper to stagger items
-          className="bg-white/70 dark:bg-slate-800/50 backdrop-blur-md shadow-xl shadow-green-900/5 dark:shadow-black/10 rounded-2xl p-1 md:p-2"
+          className="bg-white/70 dark:bg-slate-800/50 backdrop-blur-md shadow-xl shadow-green-900/5 dark:shadow-black/10 rounded-2xl p-1 md:p-2 max-w-3xl mx-auto"
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
         >
           {faqData.map((item, index) => (
-            <FaqItem
-              key={index}
-              index={index}
-              question={item.question}
-              answer={item.answer}
-              isOpen={openIndex === index}
-              onClick={() => handleItemClick(index)}
-            />
+            <motion.div key={index} variants={fadeUp}>
+              <FAQItem
+                key={index}
+                index={index}
+                faq={item}
+                isOpen={openIndex === index}
+                onClick={() => handleItemClick(index)}
+              />
+            </motion.div>
           ))}
         </motion.div>
-      </div>
-    </motion.section>
+      </motion.div>
+    </Section>
   );
 }

@@ -564,3 +564,5 @@ export function InteractiveDemo() {
     </div>
   );
 }
+
+export default InteractiveDemo;
