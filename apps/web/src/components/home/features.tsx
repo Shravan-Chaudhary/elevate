@@ -183,14 +183,16 @@ export function Features() {
               align="center"
               className="md:text-left mb-6"
             >
-              Why choose us?
+              Why use this app?
             </Heading>
 
             <p className="text-xl text-gray-700 leading-relaxed">
-              Our platform offers unique advantages for interview preparation.
-              Leverage AI-powered analysis, flexible practice schedules, and
-              actionable feedback to boost your confidence and performance.
-              Prepare smarter, not just harder, with Elevate.
+              Most people struggle with speaking confidently in interviews. You
+              know what to say, but when it comes to actually saying it out
+              loud, you freeze up, stumble over words, or sound less confident
+              than you feel. Traditional interview prep focuses on content, but
+              real interviews are about communication. This app helps you
+              practice the actual conversation skills you need to succeed.
             </p>
           </motion.div>
 
