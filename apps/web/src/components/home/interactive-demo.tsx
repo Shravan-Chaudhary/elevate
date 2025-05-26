@@ -2,7 +2,6 @@ import AIAvatar from "@/components/interview/ai-avatar";
 import SoundWave from "@/components/interview/sound-wave";
 import UserAvatar from "@/components/interview/user-avatar";
 import { useEffect, useRef, useState } from "react";
-// import { Button } from '@/components/ui/button' // Remove unused import
 import { cn } from "@/lib/utils";
 import { Mic, MicOff, Phone } from "lucide-react";
 
@@ -265,8 +264,8 @@ export function InteractiveDemo() {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto mt-10 animate-fade-in animate-float">
-      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-50 to-white border border-gray-200 shadow-2xl">
+    <div className="w-full max-w-5xl mx-auto mt-10">
+      <div className="relative rounded-2xl overflow-hidden">
         {/* Mockup Browser Frame */}
         <div className="bg-white border-b border-gray-200 p-4 flex items-center justify-between relative">
           <div className="hidden sm:flex items-center space-x-2">
@@ -288,7 +287,7 @@ export function InteractiveDemo() {
         <div className="bg-white px-6 py-3 border-b border-gray-200 flex items-center justify-between">
           <div className="flex items-center">
             <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
-              <Mic className="h-4 w-4 text-green-700 md:h-4 md:w-4 h-3 w-3" />
+              <Mic className="h-4 w-4 text-green-700" />
             </div>
             <span className="ml-2 font-medium text-gray-900 text-xs md:text-base hidden xs:inline md:inline">
               Elevate Interview Session
@@ -317,7 +316,7 @@ export function InteractiveDemo() {
         </div>
 
         {/* Call interface */}
-        <div className="p-6 md:p-10 bg-[#F8FAFC] relative">
+        <div className="p-6 md:p-10 relative">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-50/10 to-green-50/10 backdrop-blur-3xl"></div>
 
           {/* Hidden circles for animation */}
