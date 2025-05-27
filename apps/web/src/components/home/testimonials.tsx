@@ -142,7 +142,7 @@ export function Testimonials() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="text-center mb-20"
+          className="text-center mb-24 md:mb-28"
         >
           <motion.div
             initial={{ scale: 0.95 }}
@@ -155,7 +155,7 @@ export function Testimonials() {
               size="3xl"
               align="center"
               variant="section"
-              className="relative mb-6"
+              className="relative mb-6 text-4xl md:text-5xl font-bold tracking-tight"
             >
               <span className="relative z-10">
                 Loved by{" "}
@@ -185,10 +185,11 @@ export function Testimonials() {
               align="center"
               size="lg"
               maxWidth="3xl"
+              className="text-lg md:text-xl text-slate-600 dark:text-slate-300"
             >
               Join thousands of professionals who have transformed their
               interview skills and landed their dream jobs with Elevate's
-              AI-powered coaching.
+              AI-powered coaching platform.
             </Description>
           </motion.div>
         </motion.div>
@@ -201,7 +202,7 @@ export function Testimonials() {
           className="relative"
         >
           {/* Grid container with staggered animation */}
-          <div className="grid gap-6 md:gap-8 lg:gap-10 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+          <div className="grid gap-8 md:gap-10 lg:gap-12 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
             {testimonialsData.map((testimonial, index) => (
               <motion.div
                 key={index}
@@ -316,12 +317,12 @@ export function Testimonials() {
                   ease: "easeOut",
                   delay: 2.2 + index * 0.1,
                 }}
-                className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50"
+                className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-3xl px-8 py-6 shadow-xl shadow-slate-200/80 dark:shadow-slate-900/80 border border-slate-200/60 dark:border-slate-700/60"
               >
-                <div className="text-2xl font-bold text-green-900 dark:text-green-100 mb-1">
+                <div className="text-3xl md:text-4xl font-bold text-green-900 dark:text-green-100 mb-2">
                   {stat.number}
                 </div>
-                <div className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+                <div className="text-sm md:text-base text-slate-600 dark:text-slate-400 font-medium">
                   {stat.label}
                 </div>
               </motion.div>
