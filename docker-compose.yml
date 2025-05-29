@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: elevate-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+    volumes:
+      - elevate-mongo-data:/data/db
+    networks:
+      - elevate-network
+
+  # Uncomment and configure when you're ready to containerize your apps
+  # server:
+  #   build:
+  #     context: ./apps/server
+  #     dockerfile: Dockerfile
+  #   container_name: elevate-server
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3001:3001"
+  #   environment:
+  #     - DATABASE_URL=mongodb://root:root@mongodb:27017/elevate
+  #   depends_on:
+  #     - mongodb
+  #   networks:
+  #     - elevate-network
+
+  # web:
+  #   build:
+  #     context: ./apps/web
+  #     dockerfile: Dockerfile
+  #   container_name: elevate-web
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   networks:
+  #     - elevate-network
+
+volumes:
+  elevate-mongo-data:
+    driver: local
+
+networks:
+  elevate-network:
+    driver: bridge
