@@ -85,8 +85,8 @@ export function Hero() {
 
         <motion.div
           className="w-full flex justify-center md:mx-0"
-          initial={{ opacity: 0, y: 40, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 1,
             ease: smooth,

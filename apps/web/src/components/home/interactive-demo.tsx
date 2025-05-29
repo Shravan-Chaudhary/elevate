@@ -90,9 +90,9 @@ export function InteractiveDemo() {
       }
 
       @keyframes floatSlow {
-        0% { transform: translateY(0) scale(1); }
-        50% { transform: translateY(-10px) scale(1.05); }
-        100% { transform: translateY(0) scale(1); }
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
       }
 
       @keyframes bounceSubtle {
@@ -106,9 +106,9 @@ export function InteractiveDemo() {
       }
 
       @keyframes floatSide {
-        0% { transform: translateX(0) scale(1); }
-        50% { transform: translateX(5px) scale(1.03); }
-        100% { transform: translateX(0) scale(1); }
+        0% { transform: translateX(0); }
+        50% { transform: translateX(5px); }
+        100% { transform: translateX(0); }
       }
 
       .animate-bounce-subtle {
@@ -265,7 +265,7 @@ export function InteractiveDemo() {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto mt-10 animate-fade-in animate-float">
+    <div className="w-full max-w-5xl mx-auto mt-10 animate-fade-in">
       <div className="relative rounded-2xl overflow-hidden bg-gradient-to-b from-gray-50 to-white border border-gray-200 shadow-2xl">
         {/* Mockup Browser Frame */}
         <div className="bg-white border-b border-gray-200 p-4 flex items-center justify-between relative">
