@@ -55,37 +55,33 @@ export function Faq() {
   return (
     <Section
       variant="default"
-      background="transparent"
-      className="relative overflow-hidden py-24 md:py-32"
+      background="subtle"
+      className="relative overflow-hidden bg-gradient-to-b from-green-50/30 to-white dark:from-green-900/20 dark:to-slate-900"
       id="faq"
     >
-      {/* Enhanced subtle background patterns */}
+      <GradientBackground variant="section" className="absolute inset-0" />
+
+      {/* Subtle background patterns */}
       <motion.div
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -z-10 opacity-50 dark:opacity-30"
         variants={fadeIn}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
       >
-        {/* Sophisticated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 via-white to-gray-50/30" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,197,94,0.03),transparent_70%)]" />
-
-        {/* Animated subtle patterns */}
         <motion.div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(150,220,150,0.04)_0%,_transparent_50%)] [mask-image:linear-gradient(transparent,white,transparent)]"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(150,220,150,0.03)_0%,_transparent_60%)] dark:bg-[radial-gradient(circle_at_center,_rgba(30,100,50,0.05)_0%,_transparent_70%)] [mask-image:linear-gradient(transparent,white,transparent)]"
           animate={{
-            scale: [1, 1.05, 1],
-            opacity: [0.3, 0.5, 0.3],
+            scale: [1, 1.1, 1],
+            opacity: [0.5, 0.3, 0.5],
           }}
           transition={{
-            duration: 10,
+            duration: 8,
             ease: "easeInOut",
             repeat: Infinity,
             repeatType: "reverse",
           }}
-        />
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.02] [mask-image:linear-gradient(180deg,transparent,white,transparent)]" />
+        ></motion.div>
       </motion.div>
 
       <motion.div
@@ -96,7 +92,7 @@ export function Faq() {
         className="relative z-10"
       >
         <motion.div
-          className="flex flex-col items-center text-center mb-16 md:mb-20"
+          className="flex flex-col items-center text-center mb-12 md:mb-16"
           variants={fadeUp}
         >
           <motion.div
@@ -128,10 +124,10 @@ export function Faq() {
             size="3xl"
             align="center"
             variant="section"
-            className="mb-6 text-4xl md:text-5xl font-bold tracking-tight"
+            className="mb-6"
           >
             Frequently Asked{" "}
-            <span className="bg-gradient-to-r from-green-600 via-green-700 to-green-800 bg-clip-text text-transparent">
+            <span className="text-green-700 dark:text-green-400">
               Questions
             </span>
           </Heading>
@@ -141,15 +137,14 @@ export function Faq() {
             align="center"
             size="xl"
             maxWidth="2xl"
-            className="text-lg md:text-xl text-slate-600 dark:text-slate-300"
           >
             Find answers to common questions about Elevate, its features, and
-            how it can help you transform your interview performance.
+            how it can help you succeed.
           </Description>
         </motion.div>
 
         <motion.div
-          className="bg-white/80 dark:bg-slate-800/60 backdrop-blur-xl shadow-2xl shadow-green-900/10 dark:shadow-black/20 rounded-3xl p-2 md:p-3 max-w-4xl mx-auto border border-green-100/50 dark:border-green-900/20"
+          className="bg-white/70 dark:bg-slate-800/50 backdrop-blur-md shadow-xl shadow-green-900/5 dark:shadow-black/10 rounded-2xl p-1 md:p-2 max-w-3xl mx-auto"
           variants={stagger}
           initial="hidden"
           whileInView="visible"

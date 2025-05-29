@@ -69,11 +69,13 @@ export function Pricing() {
   return (
     <Section
       variant="default"
-      background="transparent"
-      className="relative overflow-hidden py-24 md:py-32"
+      background="subtle"
+      className="relative overflow-hidden bg-gradient-to-br from-gray-50/30 to-green-50/20 dark:from-slate-900 dark:to-green-900/10"
       id="pricing"
     >
-      {/* Enhanced decorative background elements */}
+      <GradientBackground variant="section" className="absolute inset-0" />
+
+      {/* Decorative background elements */}
       <motion.div
         className="absolute inset-0 -z-10 overflow-hidden"
         variants={fadeIn}
@@ -81,31 +83,11 @@ export function Pricing() {
         whileInView="visible"
         viewport={{ once: true }}
       >
-        {/* Sophisticated gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-br from-green-50/30 via-transparent to-blue-50/20" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(34,197,94,0.05),transparent_70%),radial-gradient(ellipse_at_bottom_left,rgba(59,130,246,0.05),transparent_70%)]" />
-
-        {/* Animated background elements */}
         <motion.div
-          className="absolute w-[50rem] h-[50rem] rounded-full bg-gradient-to-r from-green-100/20 to-blue-100/20 -top-[15rem] -right-[15rem] blur-3xl"
+          className="absolute w-[40rem] h-[40rem] rounded-full bg-green-800/5 dark:bg-green-400/5 -top-[10rem] -right-[10rem] blur-3xl"
           animate={{
-            x: [0, -30, 0],
-            y: [0, 20, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 15,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        />
-        <motion.div
-          className="absolute w-[40rem] h-[40rem] rounded-full bg-gradient-to-l from-blue-100/15 to-green-100/15 top-[35rem] -left-[15rem] blur-3xl"
-          animate={{
-            x: [0, 40, 0],
-            y: [0, -25, 0],
-            scale: [1, 0.9, 1],
+            x: [0, -20, 0],
+            y: [0, 10, 0],
           }}
           transition={{
             duration: 12,
@@ -113,8 +95,21 @@ export function Pricing() {
             repeat: Infinity,
             repeatType: "reverse",
           }}
-        />
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.03] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+        ></motion.div>
+        <motion.div
+          className="absolute w-[30rem] h-[30rem] rounded-full bg-emerald-800/5 dark:bg-emerald-400/5 top-[30rem] -left-[10rem] blur-3xl"
+          animate={{
+            x: [0, 25, 0],
+            y: [0, -15, 0],
+          }}
+          transition={{
+            duration: 10,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        ></motion.div>
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center opacity-[0.02] dark:opacity-[0.01] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))] dark:[mask-image:linear-gradient(180deg,black,rgba(0,0,0,0))]"></div>
       </motion.div>
 
       <motion.div
@@ -125,7 +120,7 @@ export function Pricing() {
         className="relative z-10"
       >
         <motion.div
-          className="flex flex-col items-center text-center mb-20 md:mb-24"
+          className="flex flex-col items-center text-center mb-16 md:mb-20"
           variants={fadeUp}
         >
           <Heading
@@ -133,10 +128,10 @@ export function Pricing() {
             size="3xl"
             align="center"
             variant="section"
-            className="mb-8 text-5xl md:text-6xl font-bold tracking-tight"
+            className="mb-6"
           >
             Simple,{" "}
-            <span className="bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">
+            <span className="text-green-700 dark:text-green-400">
               Transparent
             </span>{" "}
             Pricing
@@ -145,10 +140,10 @@ export function Pricing() {
             variant="section"
             align="center"
             size="xl"
-            className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-medium"
+            maxWidth="2xl"
           >
-            Choose the plan that&apos;s right for you. Start with our free plan
-            and upgrade when you&apos;re ready to unlock advanced features.
+            Choose the plan that&apos;s right for you. All plans include a 7-day
+            free trial.
           </Description>
         </motion.div>
 
