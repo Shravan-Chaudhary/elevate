@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { FeatureItem, BaseComponentProps } from "@/types/components";
-import { IconContainer } from "../shared/icon-container";
+import { IconContainer } from "./icon-container";
 import { Heading } from "./heading";
 import { Description } from "./description";
 

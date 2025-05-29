@@ -16,7 +16,7 @@ const testimonialsData: TestimonialData[] = [
     author: {
       name: "Alex Johnson",
       role: "Software Engineer at Google",
-      avatar: "/testimonials/avatar-1.png",
+      avatar: "/testimonials/avatar-1.svg",
     },
     rating: 5,
   },
@@ -26,7 +26,7 @@ const testimonialsData: TestimonialData[] = [
     author: {
       name: "Sarah Chen",
       role: "Product Manager at Stripe",
-      avatar: "/testimonials/avatar-2.png",
+      avatar: "/testimonials/avatar-2.svg",
     },
     rating: 5,
   },
@@ -36,7 +36,7 @@ const testimonialsData: TestimonialData[] = [
     author: {
       name: "Miguel Rodriguez",
       role: "Data Scientist at Netflix",
-      avatar: "/testimonials/avatar-3.png",
+      avatar: "/testimonials/avatar-3.svg",
     },
     rating: 5,
   },
@@ -46,7 +46,7 @@ const testimonialsData: TestimonialData[] = [
     author: {
       name: "Priya Patel",
       role: "Career Coach & Consultant",
-      avatar: "/testimonials/avatar-4.png",
+      avatar: "/testimonials/avatar-4.svg",
     },
     rating: 5,
   },
@@ -56,7 +56,7 @@ const testimonialsData: TestimonialData[] = [
     author: {
       name: "David Kim",
       role: "Marketing Director at Adobe",
-      avatar: "/testimonials/avatar-5.png",
+      avatar: "/testimonials/avatar-5.svg",
     },
     rating: 5,
   },
@@ -66,7 +66,7 @@ const testimonialsData: TestimonialData[] = [
     author: {
       name: "Emma Watson",
       role: "UX Designer at Spotify",
-      avatar: "/testimonials/avatar-6.png",
+      avatar: "/testimonials/avatar-6.svg",
     },
     rating: 4,
   },
@@ -80,7 +80,7 @@ export function Testimonials() {
     <Section
       variant="default"
       background="subtle"
-      className="relative overflow-hidden bg-gradient-to-br from-slate-50/50 via-white to-green-50/30 dark:from-slate-900/90 dark:via-slate-800/50 dark:to-green-900/20"
+      className="relative overflow-hidden bg-gradient-to-br from-slate-50/50 via-white to-green-50/30 dark:from-slate-900/90 dark:via-slate-800/50 dark:to-green-900/20 py-12 md:py-24"
       id="testimonials"
     >
       {/* Enhanced background patterns */}
@@ -142,7 +142,7 @@ export function Testimonials() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="text-center mb-24 md:mb-28"
+          className="text-center mb-12 md:mb-20"
         >
           <motion.div
             initial={{ scale: 0.95 }}
@@ -155,7 +155,7 @@ export function Testimonials() {
               size="3xl"
               align="center"
               variant="section"
-              className="relative mb-6 text-4xl md:text-5xl font-bold tracking-tight"
+              className="relative mb-6"
             >
               <span className="relative z-10">
                 Loved by{" "}
@@ -185,24 +185,44 @@ export function Testimonials() {
               align="center"
               size="lg"
               maxWidth="3xl"
-              className="text-lg md:text-xl text-slate-600 dark:text-slate-300"
             >
               Join thousands of professionals who have transformed their
               interview skills and landed their dream jobs with Elevate's
-              AI-powered coaching platform.
+              AI-powered coaching.
             </Description>
           </motion.div>
         </motion.div>
 
-        {/* Testimonials grid with enhanced modern layout */}
+        {/* Testimonials layout - responsive carousel for mobile, grid for desktop */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
           className="relative"
         >
-          {/* Grid container with staggered animation */}
-          <div className="grid gap-8 md:gap-10 lg:gap-12 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+          {/* Mobile: One testimonial at a time with snap scrolling */}
+          <div className="md:hidden">
+            <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide -mx-4">
+              {testimonialsData.map((testimonial, index) => (
+                <div key={index} className="flex-none w-full px-4 snap-center">
+                  <TestimonialCard testimonial={testimonial} index={index} />
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile scroll indicator dots */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {testimonialsData.map((_, index) => (
+                <div
+                  key={index}
+                  className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600"
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop: Grid layout */}
+          <div className="hidden md:grid gap-6 md:gap-8 lg:gap-10 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
             {testimonialsData.map((testimonial, index) => (
               <motion.div
                 key={index}
@@ -295,10 +315,10 @@ export function Testimonials() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 2.0 }}
-          className="text-center mt-24"
+          className="text-center mt-16 md:mt-24"
         >
           {/* Metrics cards */}
-          <div className="flex flex-wrap justify-center gap-8 mb-12">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 mb-8 md:mb-12">
             {[
               { number: "10,000+", label: "Active Users" },
               { number: "95%", label: "Success Rate" },
@@ -317,12 +337,12 @@ export function Testimonials() {
                   ease: "easeOut",
                   delay: 2.2 + index * 0.1,
                 }}
-                className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl rounded-3xl px-8 py-6 shadow-xl shadow-slate-200/80 dark:shadow-slate-900/80 border border-slate-200/60 dark:border-slate-700/60"
+                className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg shadow-slate-200/50 dark:shadow-slate-900/50 border border-slate-200/50 dark:border-slate-700/50"
               >
-                <div className="text-3xl md:text-4xl font-bold text-green-900 dark:text-green-100 mb-2">
+                <div className="text-2xl font-bold text-green-900 dark:text-green-100 mb-1">
                   {stat.number}
                 </div>
-                <div className="text-sm md:text-base text-slate-600 dark:text-slate-400 font-medium">
+                <div className="text-sm text-slate-600 dark:text-slate-400 font-medium">
                   {stat.label}
                 </div>
               </motion.div>

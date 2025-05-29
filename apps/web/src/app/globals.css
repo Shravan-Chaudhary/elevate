@@ -120,90 +120,61 @@
     /* Explicitly set light theme background and text color for robustness */
     background-color: oklch(1 0 0); /* Light theme background */
     color: oklch(0.145 0 0); /* Light theme foreground */
-    /* @apply bg-background text-foreground; */ /* Removed theme-dependent classes */
   }
 }
 
 /* Custom Animations */
 @keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
 @keyframes soft-pulse {
-  0% {
-    opacity: 0.7;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.7;
-  }
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 @keyframes slide-right {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 100%;
-  }
+  0% { width: 0; }
+  100% { width: 100%; }
 }
 
 @keyframes soundWave {
-  0%,
-  100% {
-    height: var(--random-height, 10px);
-  }
-  50% {
-    height: var(--random-height-alt, 20px);
-  }
+  0%, 100% { height: var(--random-height, 10px); }
+  50% { height: var(--random-height-alt, 20px); }
 }
 
 @keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 @keyframes loop-x {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
 }
 
 @keyframes pulse-slow {
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.7;
-  }
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes verySlowFloat {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-5px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
 }
 
 /* Enhanced buttery smooth animations */
@@ -324,21 +295,23 @@ html {
   animation: shimmer 3s infinite;
 }
 
-/* Cursor styles */
-.cursor-pointer,
-button,
-a {
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-very-slow-float {
+  animation: verySlowFloat 4s ease-in-out infinite;
+}
+
+/* Interactive elements */
+.cursor-pointer, button, a {
   cursor: pointer !important;
 }
 
-/* Smooth transitions */
-a,
-button,
-.transition-all {
+a, button, .transition-all {
   transition: all 0.2s ease-in-out !important;
 }
 
-/* Hover effects */
 .hover-lift {
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
@@ -349,9 +322,7 @@ button,
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* Button animations */
-button:active:not(:disabled),
-a:active {
+button:active:not(:disabled), a:active {
   transform: scale(0.98);
 }
 
@@ -363,106 +334,13 @@ a:active {
   transform: scale(0.98);
 }
 
-/* Fade in animation */
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Scrollbar hide utility for mobile testimonials carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  scroll-behavior: smooth;
 }
 
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
-
-/* Added verySlowFloat animation */
-@keyframes verySlowFloat {
-  0% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-5px) scale(1.02);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-  }
-}
-.animate-very-slow-float {
-  animation: verySlowFloat 4s ease-in-out infinite;
-}
-
-/* Hero Section Animations */
-@keyframes hero-sound-bar-pulse {
-  0% {
-    transform: scaleY(0.2);
-  }
-  100% {
-    transform: scaleY(1);
-  }
-}
-@keyframes hero-blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-@keyframes hero-float-slow {
-  0% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-10px) scale(1.05);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-  }
-}
-@keyframes hero-bounce-subtle {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-@keyframes hero-bounce-right {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(-8px);
-  }
-}
-@keyframes hero-float-side {
-  0% {
-    transform: translateX(0) scale(1);
-  }
-  50% {
-    transform: translateX(5px) scale(1.03);
-  }
-  100% {
-    transform: translateX(0) scale(1);
-  }
-}
-
-.animate-hero-bounce-subtle {
-  animation: hero-bounce-subtle 1.5s ease-in-out infinite;
-}
-.animate-hero-bounce-right {
-  animation: hero-bounce-right 1.5s ease-in-out infinite;
-}
-.animate-hero-float-slow {
-  animation: hero-float-slow 2.5s ease-in-out infinite;
-}
-.animate-hero-float-side {
-  animation: hero-float-side 2.5s ease-in-out infinite;
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
 }
