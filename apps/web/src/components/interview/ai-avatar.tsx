@@ -23,151 +23,93 @@ const AIAvatar: FC<AIAvatarProps> = ({ speaking }) => (
       }`}
     >
       <svg
-        viewBox="0 0 200 200"
+        viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-[90%] h-[90%]"
+        className="w-full h-full"
       >
-        {/* Background */}
-        <circle cx="100" cy="100" r="80" fill="rgba(255,255,255,0.1)" />
+        <defs>
+          <linearGradient id="robotBody" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#10b981" />
+            <stop offset="100%" stopColor="#059669" />
+          </linearGradient>
+          <linearGradient id="robotScreen" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ecfccb" />
+            <stop offset="100%" stopColor="#d9f99d" />
+          </linearGradient>
+        </defs>
 
-        {/* Neck */}
-        <path
-          d="M82 140C82 140 82 160 100 160C118 160 118 140 118 140"
-          fill="#b1dcd6"
+        {/* Robot body/head */}
+        <rect
+          x="20"
+          y="25"
+          width="60"
+          height="50"
+          rx="12"
+          fill="url(#robotBody)"
         />
 
-        {/* Face */}
-        <ellipse
-          cx="100"
-          cy="90"
-          rx="35"
-          ry="40"
-          fill="#dcfce7"
-          stroke="#dcfce7"
+        {/* Screen/face area */}
+        <rect
+          x="25"
+          y="30"
+          width="50"
+          height="35"
+          rx="8"
+          fill="url(#robotScreen)"
+          stroke="#16a34a"
           strokeWidth="1"
         />
 
-        {/* Hair */}
-        <path
-          d="M65 85C65 65 75 45 100 45C125 45 135 65 135 85"
-          fill="#065f46"
-        />
-        <path
-          d="M65 85C65 65 75 45 100 45C125 45 135 65 135 85"
-          stroke="#065f46"
-          strokeWidth="1"
-        />
-        <path
-          d="M65 85C65 85 65 75 60 65C55 55 67 52 70 60C73 68 65 85 65 85Z"
-          fill="#065f46"
-          stroke="#065f46"
-          strokeWidth="1"
-        />
-        <path
-          d="M135 85C135 85 135 75 140 65C145 55 133 52 130 60C127 68 135 85 135 85Z"
-          fill="#065f46"
-          stroke="#065f46"
-          strokeWidth="1"
-        />
-
-        {/* Ears */}
-        <ellipse cx="65" cy="90" rx="5" ry="10" fill="#dcfce7" />
-        <ellipse cx="135" cy="90" rx="5" ry="10" fill="#dcfce7" />
-
-        {/* Headset */}
-        <path
-          d="M65 90C65 90 55 85 55 90C55 95 55 100 60 100C65 100 65 95 65 90Z"
-          fill="#059669"
-          stroke="white"
-          strokeWidth="1"
-        />
-        <path
-          d="M135 90C135 90 145 85 145 90C145 95 145 100 140 100C135 100 135 95 135 90Z"
-          fill="#059669"
-          stroke="white"
-          strokeWidth="1"
-        />
-        <path
-          d="M65 80C65 80 75 55 100 55C125 55 135 80 135 80"
-          stroke="#059669"
-          strokeWidth="3"
-        />
-
-        {/* Eyes */}
+        {/* Eyes - LED style */}
         <g
           className={speaking ? "animate-pulse" : ""}
-          style={{ animationDuration: "3s" }}
+          style={{ animationDuration: "1.5s" }}
         >
-          <ellipse cx="85" cy="85" rx="7" ry="8" fill="white" />
-          <ellipse cx="115" cy="85" rx="7" ry="8" fill="white" />
-          <circle cx="85" cy="85" r="3.5" fill="#065f46" />
-          <circle cx="115" cy="85" r="3.5" fill="#065f46" />
-          {/* Eye shine */}
-          <circle cx="86.5" cy="83.5" r="1.5" fill="white" />
-          <circle cx="116.5" cy="83.5" r="1.5" fill="white" />
+          <circle cx="38" cy="42" r="4" fill="#16a34a" />
+          <circle cx="62" cy="42" r="4" fill="#16a34a" />
+          <circle cx="38" cy="42" r="1.5" fill="#86efac" />
+          <circle cx="62" cy="42" r="1.5" fill="#86efac" />
         </g>
 
-        {/* Eyebrows */}
-        <path
-          d="M78 75C78 75 82 72 88 75"
-          stroke="#065f46"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <path
-          d="M122 75C122 75 118 72 112 75"
-          stroke="#065f46"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-
-        {/* Glasses */}
+        {/* Mouth - digital display */}
         <rect
-          x="75"
-          y="80"
-          width="20"
-          height="12"
-          rx="6"
-          stroke="#10b981"
-          strokeWidth="1.5"
-          fill="none"
-        />
-        <rect
-          x="105"
-          y="80"
-          width="20"
-          height="12"
-          rx="6"
-          stroke="#10b981"
-          strokeWidth="1.5"
-          fill="none"
-        />
-        <line
-          x1="95"
-          y1="86"
-          x2="105"
-          y2="86"
-          stroke="#10b981"
-          strokeWidth="1.5"
-        />
-
-        {/* Smile/Mouth */}
-        <path
+          x="35"
+          y="52"
+          width="30"
+          height="6"
+          rx="3"
+          fill="#16a34a"
           className={speaking ? "animate-pulse" : ""}
-          d="M85 105C85 105 90 115 100 115C110 115 115 105 115 105"
-          stroke="#065f46"
-          strokeWidth="2.5"
-          strokeLinecap="round"
         />
 
-        {/* Blush */}
-        <circle cx="75" cy="100" r="5" fill="#fecaca" opacity="0.5" />
-        <circle cx="125" cy="100" r="5" fill="#fecaca" opacity="0.5" />
+        {/* Antenna */}
+        <rect x="48" y="15" width="4" height="12" fill="#16a34a" />
+        <circle cx="50" cy="12" r="3" fill="#22c55e">
+          <animate
+            attributeName="opacity"
+            values="1;0.5;1"
+            dur="2s"
+            repeatCount="indefinite"
+          />
+        </circle>
 
-        {/* Collared shirt */}
-        <path d="M82 140L86 150H100H114L118 140" fill="#047857" />
-        <path d="M100 150V160" stroke="white" strokeWidth="2" />
+        {/* Side panels */}
+        <rect x="15" y="35" width="8" height="20" rx="2" fill="#059669" />
+        <rect x="77" y="35" width="8" height="20" rx="2" fill="#059669" />
+
+        {/* Audio indicators when speaking */}
+        {speaking && (
+          <g className="animate-pulse" style={{ animationDuration: "1s" }}>
+            <rect x="10" y="38" width="2" height="4" fill="#22c55e" />
+            <rect x="10" y="44" width="2" height="6" fill="#22c55e" />
+            <rect x="10" y="52" width="2" height="4" fill="#22c55e" />
+
+            <rect x="88" y="38" width="2" height="4" fill="#22c55e" />
+            <rect x="88" y="44" width="2" height="6" fill="#22c55e" />
+            <rect x="88" y="52" width="2" height="4" fill="#22c55e" />
+          </g>
+        )}
       </svg>
     </div>
   </div>
